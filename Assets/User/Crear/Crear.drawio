@@ -1,0 +1,82 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36" version="24.7.17">
+  <diagram name="Página-1" id="-aoCV6sc0Hi4sU51KHjA">
+    <mxGraphModel dx="972" dy="593" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="S2AWf9Gyu8BvviSqurSQ-9" value="" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.containers.browserWindow;rSize=0;strokeColor2=#008cff;strokeColor3=#c4c4c4;mainText=,;recursiveResize=0;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="90" y="100" width="840" height="620" as="geometry" />
+        </mxCell>
+        <mxCell id="S2AWf9Gyu8BvviSqurSQ-10" value="Poke Api" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.containers.anchor;fontSize=17;fontColor=#666666;align=left;whiteSpace=wrap;" vertex="1" parent="S2AWf9Gyu8BvviSqurSQ-9">
+          <mxGeometry x="60" y="12" width="110" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="S2AWf9Gyu8BvviSqurSQ-11" value="https://localhost:4200" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.containers.anchor;rSize=0;fontSize=17;fontColor=#666666;align=left;" vertex="1" parent="S2AWf9Gyu8BvviSqurSQ-9">
+          <mxGeometry x="130" y="60" width="250" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="S2AWf9Gyu8BvviSqurSQ-52" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeColor=#FFFFFF;fillColor=#33001A;" vertex="1" parent="S2AWf9Gyu8BvviSqurSQ-9">
+          <mxGeometry x="380" y="150" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="S2AWf9Gyu8BvviSqurSQ-53" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="90" y="210" width="840" height="510" as="geometry" />
+        </mxCell>
+        <mxCell id="S2AWf9Gyu8BvviSqurSQ-56" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F86872;strokeColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="90" y="210" width="840" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="S2AWf9Gyu8BvviSqurSQ-57" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#000033;strokeColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="470" y="230" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="S2AWf9Gyu8BvviSqurSQ-58" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#000000;strokeColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="480" y="240" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="S2AWf9Gyu8BvviSqurSQ-59" value="PokeApi" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=31;" vertex="1" parent="1">
+          <mxGeometry x="90" y="215" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="S2AWf9Gyu8BvviSqurSQ-60" value="Lista" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="220" y="225" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="S2AWf9Gyu8BvviSqurSQ-61" value="Agregar" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="270" y="225" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="S2AWf9Gyu8BvviSqurSQ-62" value="Usuario1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="800" y="225" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="S2AWf9Gyu8BvviSqurSQ-63" value="" style="verticalLabelPosition=bottom;shadow=0;dashed=0;align=center;html=1;verticalAlign=top;strokeWidth=1;shape=mxgraph.mockup.graphics.simpleIcon;strokeColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="860" y="222.5" width="40" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="S2AWf9Gyu8BvviSqurSQ-141" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="130" y="300" width="260" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="S2AWf9Gyu8BvviSqurSQ-142" value="" style="verticalLabelPosition=bottom;shadow=0;dashed=0;align=center;html=1;verticalAlign=top;strokeWidth=1;shape=mxgraph.mockup.containers.userMale;strokeColor=#666666;strokeColor2=#008cff;" vertex="1" parent="1">
+          <mxGeometry x="160" y="330" width="200" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="S2AWf9Gyu8BvviSqurSQ-143" value="Seleccionar Imagen" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.buttons.button;strokeColor=#666666;fontColor=#ffffff;mainText=;buttonStyle=round;fontSize=17;fontStyle=1;fillColor=#008cff;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="210" y="630" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="S2AWf9Gyu8BvviSqurSQ-156" value="Numero pokedex" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="600" y="310" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="S2AWf9Gyu8BvviSqurSQ-157" value="&amp;nbsp; &amp;nbsp; 1" style="rounded=1;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="610" y="340" width="270" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="S2AWf9Gyu8BvviSqurSQ-158" value="Nombre" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="620" y="370" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="S2AWf9Gyu8BvviSqurSQ-159" value="Tipo" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="610" y="425" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="S2AWf9Gyu8BvviSqurSQ-160" value="&amp;nbsp; &amp;nbsp; Pokemon1" style="rounded=1;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="610" y="395" width="270" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="S2AWf9Gyu8BvviSqurSQ-161" value="Agua" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.forms.comboBox;strokeColor=#999999;fillColor=#ddeeff;align=left;fillColor2=#aaddff;mainText=;fontColor=#666666;fontSize=17;spacingLeft=3;" vertex="1" parent="1">
+          <mxGeometry x="610" y="450" width="270" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="S2AWf9Gyu8BvviSqurSQ-162" value="Guardar" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.buttons.button;strokeColor=#666666;fontColor=#ffffff;mainText=;buttonStyle=round;fontSize=17;fontStyle=1;fillColor=#008cff;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="770" y="660" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="S2AWf9Gyu8BvviSqurSQ-163" value="Cancelar" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.buttons.button;strokeColor=#666666;fontColor=#ffffff;mainText=;buttonStyle=round;fontSize=17;fontStyle=1;fillColor=#008cff;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="610" y="660" width="150" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
