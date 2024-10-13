@@ -1,0 +1,40 @@
+.textWhite {
+  color: #ffffff;
+}
+
+.container {
+  width: 20%;
+  height: 95vh;
+  margin-left: 5%;
+  display: flex;
+  align-items: center;
+}
+
+.formContainer {
+  align-items: center;
+}
+
+mat-card {
+  background-color: #000000;
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: end;
+  width: 100%;
+}
+
+.settings-link {
+  width: 60%;
+  text-align: end;
+  margin-bottom: 15px;
+  text-decoration: none;
+  color: blue;
+  cursor: pointer;
+}
+
+.buttons button {
+  margin-right: 1%;
+}

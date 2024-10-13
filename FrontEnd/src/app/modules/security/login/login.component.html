@@ -1,1 +1,37 @@
-<p>login works!</p>
+<div class="loginPage">
+  <div class="container">
+    <div class="formContainer">
+      <mat-card>
+        <h2 class="textWhite">Iniciar sesión</h2>
+        <form [formGroup]="form">
+          <mat-form-field appearance="fill" class="textWhite">
+            <mat-label class="textWhite">Usuario</mat-label>
+            <input formControlName="user" matInput />
+            <mat-error>{{ getError("user") }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="textWhite">
+            <mat-label class="textWhite">Contraseña</mat-label>
+            <input formControlName="password" matInput />
+            <mat-error>{{ getError("password") }}</mat-error>
+          </mat-form-field>
+
+          <div class="settings">
+            <a class="settings-link">Recuperar Contraseña</a>
+          </div>
+
+          <div class="buttons">
+            <button mat-flat-button color="primary" [disabled]="form.invalid">
+              Iniciar Sesión
+            </button>
+            <a mat-stroked-button color="accent">Registrarse</a>
+          </div>
+
+          <div class="message">
+            <span class="error"></span>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+  </div>
+</div>
