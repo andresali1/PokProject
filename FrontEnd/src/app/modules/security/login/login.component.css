@@ -2,6 +2,10 @@
   color: #ffffff;
 }
 
+h2{
+  text-align: center;
+}
+
 .container {
   width: 20%;
   height: 95vh;

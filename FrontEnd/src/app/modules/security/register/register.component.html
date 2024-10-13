@@ -1,0 +1,34 @@
+<div class="loginPage">
+  <div class="container">
+    <mat-card>
+      <h2 class="textWhite">Formulario Registro</h2>
+      <form [formGroup]="form">
+        <div class="inputs">
+          <mat-form-field appearance="fill" class="textWhite">
+            <mat-label class="textWhite">Usuario</mat-label>
+            <input formControlName="user" matInput />
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="textWhite">
+            <mat-label class="textWhite">Email</mat-label>
+            <input formControlName="email" matInput />
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="textWhite">
+            <mat-label class="textWhite">Contraseña</mat-label>
+            <input formControlName="password" matInput />
+          </mat-form-field>
+        </div>
+
+        <div class="buttons">
+          <button mat-flat-button color="primary">Registrarse</button>
+          <a mat-stroked-button color="accent">Login</a>
+        </div>
+
+        <div class="message">
+          <span class="error"></span>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>
