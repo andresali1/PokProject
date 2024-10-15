@@ -1,0 +1,75 @@
+.header {
+  height: 70px;
+  background-color: #ff0000;
+  border-bottom: #000 solid 10px;
+}
+
+.ballBtn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: #000 solid 7px;
+  margin: auto;
+  position: relative;
+  bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ballBtn_inside {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: #000 solid 2px;
+}
+
+.ballBtn_inside:hover {
+  background-color: #e5e5e5;
+  cursor: pointer;
+}
+
+.body {
+  margin-top: 30px;
+  height: 65%;
+}
+
+.navContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.navBar {
+  width: 45vw;
+  max-width: 600px;
+}
+
+.navBar ul {
+  display: flex;
+  list-style: none;
+  gap: 50px;
+  color: #fff;
+}
+
+.navBar li {
+  cursor: pointer;
+  transition: font-size 0.6s ease;
+}
+
+.navBar li:hover {
+  font-size: 1.5rem;
+}
+
+.title {
+  font-weight: bolder;
+  font-size: 2rem;
+  transition: font-size 0.6s ease;
+}
+
+.title:hover {
+  font-size: 2.5rem !important;
+}

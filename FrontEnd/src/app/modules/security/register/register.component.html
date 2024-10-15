@@ -21,8 +21,10 @@
         </div>
 
         <div class="buttons">
-          <button mat-flat-button color="primary">Registrarse</button>
-          <a mat-stroked-button color="accent">Login</a>
+          <button mat-flat-button color="primary" [disabled]="form.invalid">
+            Registrarse
+          </button>
+          <a mat-stroked-button color="accent" (click)="getLogin()">Login</a>
         </div>
 
         <div class="message">

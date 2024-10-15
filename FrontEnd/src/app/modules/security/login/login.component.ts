@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
   form: FormGroup;
 
-  constructor(private formbuilder: FormBuilder) {
+  constructor(private formbuilder: FormBuilder, private router: Router) {
     this.form = this.formbuilder.group({
       user: ['', { validators: [Validators.required] }],
       password: ['', { validators: [Validators.required] }],
@@ -39,5 +40,13 @@ export class LoginComponent implements OnInit {
       default:
         break;
     }
+  }
+
+  getRegister() {
+    this.router.navigate(['/auth/register']);
+  }
+  
+  getRecover() {
+    this.router.navigate(['/auth/recover']);
   }
 }

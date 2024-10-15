@@ -2,33 +2,27 @@
   <div class="container">
     <div class="formContainer">
       <mat-card>
-        <h2 class="textWhite">Iniciar sesión</h2>
+        <h2 class="textWhite">Reestablecer Contraseña</h2>
         <form [formGroup]="form">
           <mat-form-field appearance="fill" class="textWhite">
-            <mat-label class="textWhite">Usuario</mat-label>
-            <input formControlName="user" matInput />
-            <mat-error>{{ getError("user") }}</mat-error>
+            <mat-label class="textWhite">Email</mat-label>
+            <input formControlName="email" matInput />
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="textWhite">
             <mat-label class="textWhite">Contraseña</mat-label>
             <input formControlName="password" matInput />
-            <mat-error>{{ getError("password") }}</mat-error>
           </mat-form-field>
 
-          <div class="settings">
-            <a class="settings-link" (click)="getRecover()"
-              >Recuperar Contraseña</a
-            >
-          </div>
+          <mat-form-field appearance="fill" class="textWhite">
+            <mat-label class="textWhite">Repetir Contraseña</mat-label>
+            <input formControlName="password" matInput />
+          </mat-form-field>
 
           <div class="buttons">
             <button mat-flat-button color="primary" [disabled]="form.invalid">
-              Iniciar Sesión
+              Reestablecer
             </button>
-            <a mat-stroked-button color="accent" (click)="getRegister()"
-              >Registrarse</a
-            >
           </div>
 
           <div class="message">
