@@ -1,0 +1,10 @@
+.chartContainer {
+  width: 40%;
+  max-width: 40vw;
+  height: 40%px;
+}
+
+#chart {
+  width: 100%;
+  height: 100% !important;
+}

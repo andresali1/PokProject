@@ -1,0 +1,11 @@
+h2 {
+  display: block;
+  text-align: center;
+}
+
+.cards {
+  margin: 0 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}

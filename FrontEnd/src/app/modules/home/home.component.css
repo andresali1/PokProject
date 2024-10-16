@@ -44,7 +44,7 @@
 }
 
 .navBar {
-  width: 45vw;
+  width: 70vw;
   max-width: 600px;
 }
 
@@ -61,15 +61,55 @@
 }
 
 .navBar li:hover {
-  font-size: 1.5rem;
+  font-size: 0.9rem;
 }
 
 .title {
   font-weight: bolder;
-  font-size: 2rem;
+  font-size: 0.8rem;
   transition: font-size 0.6s ease;
 }
 
 .title:hover {
-  font-size: 2.5rem !important;
+  font-size: 1.1rem !important;
+}
+
+.navBar-menu {
+  font-size: 0.6rem;
+}
+
+@media (min-width: 650px) {
+  .title {
+    font-size: 1.3rem;
+  }
+
+  .title:hover {
+    font-size: 1.8rem !important;
+  }
+
+  .navBar-menu {
+    font-size: 1.1rem;
+  }
+
+  .navBar li:hover {
+    font-size: 1.4rem;
+  }
+}
+
+@media (min-width: 1000px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .title:hover {
+    font-size: 2.5rem !important;
+  }
+
+  .navBar-menu {
+    font-size: 1rem;
+  }
+
+  .navBar li:hover {
+    font-size: 1.5rem;
+  }
 }
