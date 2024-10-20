@@ -30,10 +30,10 @@
           <input formControlName="type" matInput />
         </mat-form-field>
 
-        <div class="buttons">
+        <div class="buttons" *ngIf="!isEdit">
           <a mat-stroked-button color="warn" (click)="cancel()">Cancelar</a>
           <button mat-flat-button color="primary" [disabled]="form.invalid">
-            Iniciar Sesión
+            Crear
           </button>
         </div>
       </form>

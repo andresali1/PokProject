@@ -20,6 +20,12 @@ export class HomeComponent implements OnInit {
   }
 
   goCreate() {
+    console.log('entro a crear');
     this.router.navigate(['/home/create']);
+  }
+
+  goAdmin() {
+    console.log('entro a admin');
+    this.router.navigate(['/home/admin']);
   }
 }

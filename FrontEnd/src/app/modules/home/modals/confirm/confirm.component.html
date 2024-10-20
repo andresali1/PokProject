@@ -1,15 +1,15 @@
-<h2 mat-dialog-title>Editar Pokemón</h2>
+<h2 mat-dialog-title>Confirmación</h2>
 <mat-dialog-content class="mat-typography">
-  <app-create [isEdit]="true"></app-create>
+  <h3>¿Está seguro de querer eliminar?</h3>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancelar</button>
   <button
     mat-raised-button
-    color="primary"
+    color="warn"
     [mat-dialog-close]="true"
     cdkFocusInitial
   >
-    Guardar
+    Eliminar
   </button>
 </mat-dialog-actions>

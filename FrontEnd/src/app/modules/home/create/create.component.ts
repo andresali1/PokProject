@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { toBase64 } from '../../utilidades/utilidades';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 export class CreateComponent implements OnInit {
   imagenBase64?: string;
   form: FormGroup;
+
+  @Input() isEdit: boolean = false;
 
   constructor(private formbuilder: FormBuilder, private router: Router) {
     this.form = this.formbuilder.group({
