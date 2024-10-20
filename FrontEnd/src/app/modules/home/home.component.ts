@@ -18,4 +18,8 @@ export class HomeComponent implements OnInit {
   goList() {
     this.router.navigate(['/home/list']);
   }
+
+  goCreate() {
+    this.router.navigate(['/home/create']);
+  }
 }

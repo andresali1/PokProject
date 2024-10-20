@@ -55,3 +55,38 @@ mat-card {
   font-weight: bold;
   font-size: 1.2rem !important;
 }
+
+mat-card-footer {
+  position: relative;
+  bottom: 5%;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: end;
+}
+
+.buttons button {
+  margin-left: 10px;
+}
+
+.editBtn {
+  background-color: #4949b3;
+  transition: -webkit-box-shadow 0.5s ease-in-out;
+}
+
+.deleteBtn {
+  background-color: #ff3d3d;
+  transition: -webkit-box-shadow 0.5s ease-in-out;
+}
+
+.editBtn:hover {
+  -webkit-box-shadow: 3px 2px 16px 1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 3px 2px 16px 1px rgba(0, 0, 0, 0.75);
+  box-shadow: 3px 2px 16px 1px rgba(0, 0, 0, 0.75);
+}
+
+.deleteBtn:hover {
+  -webkit-box-shadow: 3px 2px 16px 1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 3px 2px 16px 1px rgba(0, 0, 0, 0.75);
+  box-shadow: 3px 2px 16px 1px rgba(0, 0, 0, 0.75);
+}
