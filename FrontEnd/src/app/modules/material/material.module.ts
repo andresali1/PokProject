@@ -8,6 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [],
@@ -19,6 +21,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatIconModule,
     MatDialogModule,
     MatTabsModule,
+    MatTableModule,
+    MatPaginatorModule,
   ],
   imports: [CommonModule],
 })
