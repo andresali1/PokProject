@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>Formualrio Usuario</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input formControlName="name" matInput />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Correo</mat-label>
+      <input formControlName="email" matInput />
+    </mat-form-field>
+
+    <div class="imgContainer">
+      <div class="imageForm-display">
+        <div class="image" *ngIf="imagenBase64">
+          <img [src]="imagenBase64" alt="Pokemon Img" />
+        </div>
+      </div>
+      <div class="uploadBtn">
+        <button mat-raised-button (click)="fileInput.click()">
+          Seleccionar imagen
+        </button>
+        <input type="file" hidden #fileInput (change)="guardarImagen($event)" />
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button
+    mat-raised-button
+    color="primary"
+    [mat-dialog-close]="user"
+    cdkFocusInitial
+  >
+    Guardar
+  </button>
+</mat-dialog-actions>

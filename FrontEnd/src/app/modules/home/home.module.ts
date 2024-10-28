@@ -13,6 +13,9 @@ import { PokemonComponent } from './admin/pokemon/pokemon.component';
 import { TypeComponent } from './admin/type/type.component';
 import { UsersComponent } from './admin/users/users.component';
 import { FormPokemonComponent } from '../utilidades/form-pokemon/form-pokemon.component';
+import { UserFormComponent } from './admin/user-form/user-form.component';
+import { PokemonFormComponent } from './admin/pokemon-form/pokemon-form.component';
+import { TypeFormComponent } from './admin/type-form/type-form.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,9 @@ import { FormPokemonComponent } from '../utilidades/form-pokemon/form-pokemon.co
     PokemonComponent,
     TypeComponent,
     FormPokemonComponent,
+    UserFormComponent,
+    PokemonFormComponent,
+    TypeFormComponent,
   ],
   imports: [CommonModule, MaterialModule, ReactiveFormsModule],
 })

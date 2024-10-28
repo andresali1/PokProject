@@ -1,23 +1,22 @@
 <div class="createBtn">
-  <button mat-flat-button color="primary">Crear</button>
+  <button mat-flat-button color="primary" (click)="openForm(false)">
+    Crear
+  </button>
 </div>
 
 <div class="infoTable">
   <div class="contentTable">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <!-- Position Column -->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>No.</th>
         <td mat-cell *matCellDef="let element">{{ element.id }}</td>
       </ng-container>
 
-      <!-- Name Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Nombre</th>
         <td mat-cell *matCellDef="let element">{{ element.name }}</td>
       </ng-container>
 
-      <!-- Name Column -->
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef>Acción</th>
         <td class="contentLeft" mat-cell *matCellDef="let element">
@@ -27,6 +26,7 @@
               color="primary"
               mat-mini-fab
               aria-label="Editar"
+              (click)="openForm(true)"
             >
               <mat-icon>edit</mat-icon>
             </button>
@@ -35,6 +35,7 @@
               color="warn"
               mat-mini-fab
               aria-label="Eliminar"
+              (click)="deleteDialog()"
             >
               <mat-icon>delete</mat-icon>
             </button>

@@ -1,5 +1,7 @@
 <div class="createBtn">
-  <button mat-flat-button color="primary">Crear</button>
+  <button mat-flat-button color="primary" (click)="openForm(false)">
+    Crear
+  </button>
 </div>
 
 <div class="infoTable">
@@ -47,6 +49,7 @@
               color="primary"
               mat-mini-fab
               aria-label="Editar"
+              (click)="openForm(true)"
             >
               <mat-icon>edit</mat-icon>
             </button>
@@ -55,6 +58,7 @@
               color="warn"
               mat-mini-fab
               aria-label="Eliminar"
+              (click)="deleteDialog()"
             >
               <mat-icon>delete</mat-icon>
             </button>

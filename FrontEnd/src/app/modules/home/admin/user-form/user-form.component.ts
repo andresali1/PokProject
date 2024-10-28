@@ -1,33 +1,35 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { toBase64 } from '../utilidades';
 import { Router } from '@angular/router';
+import { userDTO } from '../user';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { toBase64 } from 'src/app/modules/utilidades/utilidades';
 
 @Component({
-  selector: 'app-form-pokemon',
-  templateUrl: './form-pokemon.component.html',
-  styleUrls: ['./form-pokemon.component.css'],
+  selector: 'app-user-form',
+  templateUrl: './user-form.component.html',
+  styleUrls: ['./user-form.component.css'],
 })
-export class FormPokemonComponent implements OnInit {
-  imagenBase64?: string;
+export class UserFormComponent implements OnInit {
   form: FormGroup;
   @Input() isEdit: boolean = false;
+  imagenBase64?: string;
 
   constructor(
     private formbuilder: FormBuilder,
     private router: Router,
-    private dialogRef: MatDialogRef<FormPokemonComponent>,
+    private dialogRef: MatDialogRef<UserFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: string
   ) {
     this.form = this.formbuilder.group({
-      pokedex: ['', { validators: [Validators.required] }],
       name: ['', { validators: [Validators.required] }],
-      type: ['', { validators: [Validators.required] }],
+      email: ['', { validators: [Validators.required] }],
     });
   }
 
   ngOnInit(): void {}
+
+  user: userDTO = { id: 1, name: 'Felipe', creationDate: new Date() };
 
   guardarImagen(event: any) {
     if (event.target.files.length > 0) {
@@ -38,9 +40,5 @@ export class FormPokemonComponent implements OnInit {
         })
         .catch((error: any) => console.log(error));
     }
-  }
-
-  cancel() {
-    this.router.navigate(['/home/list']);
   }
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { EditComponent } from './modals/edit/edit.component';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router, public dialog: MatDialog) {}
 
   ngOnInit(): void {}
 
@@ -20,12 +22,17 @@ export class HomeComponent implements OnInit {
   }
 
   goCreate() {
-    console.log('entro a crear');
-    this.router.navigate(['/home/create']);
+    const dialogRef = this.dialog.open(EditComponent, {
+      data: { isEdit: false },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('Soy home');
+      console.log(result);
+    });
   }
 
   goAdmin() {
-    console.log('entro a admin');
     this.router.navigate(['/home/admin']);
   }
 }

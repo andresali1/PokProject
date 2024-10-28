@@ -14,10 +14,13 @@ export class CardComponent implements OnInit {
   ngOnInit(): void {}
 
   editDialog() {
-    const dialogRef = this.dialog.open(EditComponent);
+    const dialogRef = this.dialog.open(EditComponent, {
+      data: { isEdit: true },
+    });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+      console.log("Soy Card");
+      console.log(result);
     });
   }
 
