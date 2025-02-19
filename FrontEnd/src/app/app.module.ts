@@ -9,7 +9,8 @@ import { SecurityComponent } from './modules/security/security.component';
 import { HomeModule } from './modules/home/home.module';
 import { SecurityModule } from './modules/security/security.module';
 import { MaterialModule } from './modules/material/material.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { SecurityInterceptorService } from './modules/security/security-interceptor.service';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, SecurityComponent],
@@ -22,7 +23,13 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     SecurityModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SecurityInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

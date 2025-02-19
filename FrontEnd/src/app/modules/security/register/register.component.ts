@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SecurityService } from '../security.service';
 import { userCredentials } from '../security';
+import { APIErrorsParse } from '../../utilidades/utilidades';
 
 @Component({
   selector: 'app-register',
@@ -11,6 +12,7 @@ import { userCredentials } from '../security';
 })
 export class RegisterComponent implements OnInit {
   form: FormGroup;
+  errors: string[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,12 +30,10 @@ export class RegisterComponent implements OnInit {
   getRegister(credentials: userCredentials) {
     this.securityService.register(credentials).subscribe(
       (response) => {
-        console.log('*** Respuesta ***');
-        console.log(response);
-        console.log('*****************');
+        this.securityService.saveToken(response);
         this.router.navigate(['/']);
       },
-      (error) => console.log(error)
+      (error) => (this.errors = APIErrorsParse(error))
     );
   }
 

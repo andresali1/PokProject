@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SecurityService } from '../security.service';
+import { userCredentials } from '../security';
+import { APIErrorsParse } from '../../utilidades/utilidades';
 
 @Component({
   selector: 'app-login',
@@ -9,10 +12,15 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
+  errors: string[] = [];
 
-  constructor(private formbuilder: FormBuilder, private router: Router) {
+  constructor(
+    private formbuilder: FormBuilder,
+    private router: Router,
+    private securityService: SecurityService
+  ) {
     this.form = this.formbuilder.group({
-      user: ['', { validators: [Validators.required] }],
+      email: ['', { validators: [Validators.required] }],
       password: ['', { validators: [Validators.required] }],
     });
   }
@@ -21,11 +29,11 @@ export class LoginComponent implements OnInit {
 
   getError(field: string): string | void {
     switch (field) {
-      case 'user':
-        var email = this.form.get('user');
+      case 'email':
+        var email = this.form.get('email');
 
         if (email?.hasError('required')) {
-          return 'El campo Usuario es requerido';
+          return 'El campo Email es requerido';
         }
 
         break;
@@ -42,10 +50,20 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  getLogin(credentials: userCredentials) {
+    this.securityService.login(credentials).subscribe(
+      (response) => {
+        this.securityService.saveToken(response);
+        this.router.navigate(['/']);
+      },
+      (error) => (this.errors = APIErrorsParse(error))
+    );
+  }
+
   getRegister() {
     this.router.navigate(['/auth/register']);
   }
-  
+
   getRecover() {
     this.router.navigate(['/auth/recover']);
   }

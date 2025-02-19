@@ -73,6 +73,12 @@ namespace BackEnd.Controllers
         [HttpPost("crear")]
         public async Task<ActionResult<RespuestaAutenticacion>> Crear([FromBody] CredencialesUsuario credencialesUsuario)
         {
+            var usuarioExiste = await context.Users.AnyAsync(u => u.Email == credencialesUsuario.Email);
+
+            if(usuarioExiste){
+                return BadRequest("Usuario existe");
+            }
+
             var usuario = new IdentityUser { UserName = credencialesUsuario.Email, Email = credencialesUsuario.Email };
             var resultado = await userManager.CreateAsync(usuario, credencialesUsuario.Password);
 

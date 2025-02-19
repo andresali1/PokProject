@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 })
 export class SecurityService {
   private apiUrl = environment.apiUrl + 'cuentas';
+  private readonly tokenKey = 'token';
+  private readonly expirationKey = 'token-expiracion';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -17,5 +19,24 @@ export class SecurityService {
       `${this.apiUrl}/crear`,
       credentials
     );
+  }
+
+  login(credentials: userCredentials): Observable<authenticationResponse> {
+    return this.httpClient.post<authenticationResponse>(
+      `${this.apiUrl}/login`,
+      credentials
+    );
+  }
+
+  saveToken(authenticationResponse: authenticationResponse) {
+    localStorage.setItem(this.tokenKey, authenticationResponse.token);
+    localStorage.setItem(
+      this.expirationKey,
+      authenticationResponse.expiracion.toString()
+    );
+  }
+
+  getToken() {
+    return localStorage.getItem(this.tokenKey);
   }
 }

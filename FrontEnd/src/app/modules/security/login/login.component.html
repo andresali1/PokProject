@@ -3,11 +3,11 @@
     <div class="formContainer">
       <mat-card>
         <h2 class="textWhite">Iniciar sesión</h2>
-        <form [formGroup]="form">
+        <form [formGroup]="form" (submit)="getLogin(form.value)">
           <mat-form-field appearance="fill" class="textWhite">
-            <mat-label class="textWhite">Usuario</mat-label>
-            <input formControlName="user" matInput />
-            <mat-error>{{ getError("user") }}</mat-error>
+            <mat-label class="textWhite">Email</mat-label>
+            <input formControlName="email" matInput />
+            <mat-error>{{ getError("email") }}</mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="textWhite">
