@@ -9,6 +9,7 @@ import { SecurityComponent } from './modules/security/security.component';
 import { HomeModule } from './modules/home/home.module';
 import { SecurityModule } from './modules/security/security.module';
 import { MaterialModule } from './modules/material/material.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, SecurityComponent],
@@ -17,6 +18,7 @@ import { MaterialModule } from './modules/material/material.module';
     BrowserModule,
     BrowserAnimationsModule,
     HomeModule,
+    HttpClientModule,
     MaterialModule,
     SecurityModule,
   ],

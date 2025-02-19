@@ -19,14 +19,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 var fronEnd_url = builder.Configuration.GetValue<string>("Frontend_Url");
 
-builder.Services.AddCors(options =>
-            {
-                options.AddDefaultPolicy(builder =>
-                {
-                    builder.WithOrigins(fronEnd_url).AllowAnyMethod().AllowAnyHeader()
-                    .WithExposedHeaders(new string[] { "cantidadTotalRegistros" });
-                });
-            });
+// builder.Services.AddCors(options =>
+//             {
+//                 options.AddDefaultPolicy(builder =>
+//                 {
+//                     builder.WithOrigins(fronEnd_url).AllowAnyMethod().AllowAnyHeader()
+//                     .WithExposedHeaders(new string[] { "cantidadTotalRegistros" });
+//                 });
+//             });
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -65,12 +65,26 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(x => x
+    .WithOrigins(fronEnd_url)
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+);
+
 app.UseHttpsRedirection();
+
+app.UseRouting();
+
+
 
 app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.MapControllers();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 
 app.Run();

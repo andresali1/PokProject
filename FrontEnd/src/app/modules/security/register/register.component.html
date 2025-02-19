@@ -2,13 +2,8 @@
   <div class="container">
     <mat-card>
       <h2 class="textWhite">Formulario Registro</h2>
-      <form [formGroup]="form">
+      <form [formGroup]="form" (submit)="getRegister(form.value)">
         <div class="inputs">
-          <mat-form-field appearance="fill" class="textWhite">
-            <mat-label class="textWhite">Usuario</mat-label>
-            <input formControlName="user" matInput />
-          </mat-form-field>
-
           <mat-form-field appearance="fill" class="textWhite">
             <mat-label class="textWhite">Email</mat-label>
             <input formControlName="email" matInput />
