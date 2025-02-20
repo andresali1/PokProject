@@ -75,7 +75,8 @@ namespace BackEnd.Controllers
         {
             var usuarioExiste = await context.Users.AnyAsync(u => u.Email == credencialesUsuario.Email);
 
-            if(usuarioExiste){
+            if (usuarioExiste)
+            {
                 return BadRequest("Usuario existe");
             }
 
@@ -114,6 +115,36 @@ namespace BackEnd.Controllers
         }
 
         /// <summary>
+        /// Método para cambiar contraseña
+        /// </summary>
+        /// <param name="credencialesUsuario"></param>
+        /// <returns></returns>
+        [HttpPost("recover")]
+        public async Task<ActionResult<RespuestaAutenticacion>> Recover([FromBody] CredencialesUsuario credencialesUsuario)
+        {
+            var usuarioExiste = await context.Users.AnyAsync(u => u.Email == credencialesUsuario.Email);
+
+            if (!usuarioExiste)
+            {
+                return BadRequest("Usuario no existe");
+            }
+
+            var user = await userManager.FindByEmailAsync(credencialesUsuario.Email);
+            user.EmailConfirmed = true;
+            var token = await userManager.GeneratePasswordResetTokenAsync(user);
+            var resultado = await userManager.ResetPasswordAsync(user, token, credencialesUsuario.Password);
+
+            if (resultado.Succeeded)
+            {
+                return await ConstruirToken(credencialesUsuario);
+            }
+            else
+            {
+                return BadRequest(resultado.Errors);
+            }
+        }
+
+        /// <summary>
         /// Método para construir un token válido
         /// </summary>
         /// <param name="credenciales"></param>
@@ -142,6 +173,7 @@ namespace BackEnd.Controllers
             {
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
                 Expiracion = expiracion,
+                CurrentPass = usuario.EmailConfirmed
             };
         }
     }

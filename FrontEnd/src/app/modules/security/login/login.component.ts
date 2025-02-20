@@ -53,6 +53,8 @@ export class LoginComponent implements OnInit {
   getLogin(credentials: userCredentials) {
     this.securityService.login(credentials).subscribe(
       (response) => {
+        console.log('desde login');
+        console.log(response);
         this.securityService.saveToken(response);
         this.router.navigate(['/']);
       },
