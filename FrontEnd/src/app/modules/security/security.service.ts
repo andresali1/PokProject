@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { authenticationResponse, userCredentials } from './security';
 import { Observable } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -36,7 +37,30 @@ export class SecurityService {
     );
   }
 
+  logout() {
+    localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem(this.expirationKey);
+  }
+
   getToken() {
     return localStorage.getItem(this.tokenKey);
+  }
+
+  getUserEmail() {
+    const token = this.getToken();
+    let result: string = '';
+
+    if (token != null) {
+      try {
+        const decodedToken: any = jwtDecode(token);
+        const email = decodedToken.email;
+
+        result = email;
+      } catch (error) {
+        result = '';
+      }
+    }
+
+    return result;
   }
 }

@@ -79,7 +79,7 @@ namespace BackEnd.Controllers
                 return BadRequest("Usuario existe");
             }
 
-            var usuario = new IdentityUser { UserName = credencialesUsuario.Email, Email = credencialesUsuario.Email };
+            var usuario = new IdentityUser { UserName = credencialesUsuario.Email, Email = credencialesUsuario.Email, EmailConfirmed = true };
             var resultado = await userManager.CreateAsync(usuario, credencialesUsuario.Password);
 
             if (resultado.Succeeded)
