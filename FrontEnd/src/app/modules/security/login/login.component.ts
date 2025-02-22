@@ -12,6 +12,7 @@ import { APIErrorsParse } from '../../utilidades/utilidades';
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
+  hide: boolean = true;
   errors: string[] = [];
 
   constructor(
@@ -58,7 +59,11 @@ export class LoginComponent implements OnInit {
         this.securityService.saveToken(response);
         this.router.navigate(['/']);
       },
-      (error) => (this.errors = APIErrorsParse(error))
+      (error) => {
+        this.errors = APIErrorsParse(error);
+        console.log('Mira Felipe: ');
+        console.log(this.errors);
+      }
     );
   }
 

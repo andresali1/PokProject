@@ -42,3 +42,12 @@ form {
 .buttons a {
   margin-left: 3%;
 }
+
+.message {
+  margin-top: 10%;
+  text-align: right;
+}
+
+.error {
+  color: #d30202;
+}

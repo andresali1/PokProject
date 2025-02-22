@@ -12,6 +12,7 @@ import { APIErrorsParse } from '../../utilidades/utilidades';
 })
 export class RegisterComponent implements OnInit {
   form: FormGroup;
+  hide: boolean = true;
   errors: string[] = [];
 
   constructor(

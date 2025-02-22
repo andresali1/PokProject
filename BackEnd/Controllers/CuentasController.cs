@@ -77,7 +77,7 @@ namespace BackEnd.Controllers
 
             if (usuarioExiste)
             {
-                return BadRequest("Usuario existe");
+                return BadRequest("Correo electrónico ya registrado");
             }
 
             var usuario = new IdentityUser { UserName = credencialesUsuario.Email, Email = credencialesUsuario.Email, EmailConfirmed = true };
@@ -126,7 +126,7 @@ namespace BackEnd.Controllers
 
             if (!usuarioExiste)
             {
-                return BadRequest("Usuario no existe");
+                return BadRequest("Correo electrónico no encontrado");
             }
 
             var user = await userManager.FindByEmailAsync(credencialesUsuario.Email);

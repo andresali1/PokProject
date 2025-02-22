@@ -63,4 +63,11 @@ export class SecurityService {
 
     return result;
   }
+
+  recover(credentials: userCredentials): Observable<authenticationResponse> {
+    return this.httpClient.post<authenticationResponse>(
+      `${this.apiUrl}/recover`,
+      credentials
+    );
+  }
 }

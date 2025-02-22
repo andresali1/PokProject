@@ -11,7 +11,14 @@
 
           <mat-form-field appearance="fill" class="textWhite">
             <mat-label class="textWhite">Contraseña</mat-label>
-            <input formControlName="password" matInput />
+            <input
+              [type]="hide ? 'password' : 'text'"
+              formControlName="password"
+              matInput
+            />
+            <mat-icon matSuffix (click)="hide = !hide">{{
+              hide ? "visibility_off" : "visibility"
+            }}</mat-icon>
           </mat-form-field>
         </div>
 
@@ -23,7 +30,9 @@
         </div>
 
         <div class="message">
-          <span class="error"></span>
+          <span class="error" *ngFor="let error of errors">
+            <p>{{ error }}</p>
+          </span>
         </div>
       </form>
     </mat-card>

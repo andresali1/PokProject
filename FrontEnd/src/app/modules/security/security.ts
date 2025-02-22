@@ -3,6 +3,10 @@ export interface userCredentials {
   password: string;
 }
 
+export interface userCredentialsRecover extends userCredentials {
+  re_password: string;
+}
+
 export interface authenticationResponse {
   token: string;
   expiracion: Date;
