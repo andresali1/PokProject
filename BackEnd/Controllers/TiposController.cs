@@ -2,6 +2,7 @@
 using BackEnd;
 using BackEnd.DTOs;
 using BackEnd.Entities;
+using BackEnd.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -26,11 +27,13 @@ namespace Back_end.Controllers
         /// Método para obtener la lista de todos los tipos
         /// </summary>
         /// <returns></returns>
-        [HttpGet("todos")]
+        [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult<List<TipoDTO>>> Todos()
+        public async Task<ActionResult<List<TipoDTO>>> Get([FromQuery] PaginacionDTO paginacionDTO)
         {
-            var tipos = await context.Tipos.ToListAsync();
+            var queryable = context.Tipos.AsQueryable();
+            await HttpContext.InsertarParametrosPaginacionEnCabecera(queryable);
+            var tipos = await queryable.OrderBy(x => x.Nombre).Paginar(paginacionDTO).ToListAsync();
             return mapper.Map<List<TipoDTO>>(tipos);
         }
 

@@ -8,3 +8,19 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.success-snackbar {
+  background: #20db07;
+}
+
+.success-snackbar button {
+  color: #fff;
+}
+
+.fail-snackbar {
+  background: #ff0000;
+}
+
+.fail-snackbar button {
+  color: #fff;
+}

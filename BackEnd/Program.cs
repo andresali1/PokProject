@@ -68,8 +68,9 @@ if (app.Environment.IsDevelopment())
 app.UseCors(x => x
     .WithOrigins(fronEnd_url)
     .AllowAnyOrigin()
-    .AllowAnyMethod()
     .AllowAnyHeader()
+    .AllowAnyMethod()
+    .WithExposedHeaders(new string[] { "cantidadTotalRegistros" })
 );
 
 app.UseHttpsRedirection();

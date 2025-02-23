@@ -1,9 +1,9 @@
-<h2 mat-dialog-title>Crear tipos</h2>
+<h2 mat-dialog-title>Crear tipo</h2>
 <mat-dialog-content class="mat-typography">
   <form [formGroup]="form">
     <mat-form-field appearance="outline">
       <mat-label>Nombre</mat-label>
-      <input formControlName="name" matInput />
+      <input formControlName="nombre" matInput />
     </mat-form-field>
   </form>
 </mat-dialog-content>
@@ -12,7 +12,7 @@
   <button
     mat-raised-button
     color="primary"
-    [mat-dialog-close]="true"
+    [mat-dialog-close]="form.value"
     cdkFocusInitial
   >
     Guardar

@@ -11,6 +11,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [],
@@ -25,6 +26,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatTableModule,
     MatPaginatorModule,
     MatMenuModule,
+    MatSnackBarModule,
   ],
   imports: [CommonModule],
 })
