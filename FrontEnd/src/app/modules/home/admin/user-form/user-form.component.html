@@ -2,28 +2,9 @@
 <mat-dialog-content class="mat-typography">
   <form [formGroup]="form">
     <mat-form-field appearance="outline">
-      <mat-label>Nombre</mat-label>
-      <input formControlName="name" matInput />
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
       <mat-label>Correo</mat-label>
       <input formControlName="email" matInput />
     </mat-form-field>
-
-    <div class="imgContainer">
-      <div class="imageForm-display">
-        <div class="image" *ngIf="imagenBase64">
-          <img [src]="imagenBase64" alt="Pokemon Img" />
-        </div>
-      </div>
-      <div class="uploadBtn">
-        <button mat-raised-button (click)="fileInput.click()">
-          Seleccionar imagen
-        </button>
-        <input type="file" hidden #fileInput (change)="guardarImagen($event)" />
-      </div>
-    </div>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

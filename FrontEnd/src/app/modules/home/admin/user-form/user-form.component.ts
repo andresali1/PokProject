@@ -22,7 +22,6 @@ export class UserFormComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: string
   ) {
     this.form = this.formbuilder.group({
-      name: ['', { validators: [Validators.required] }],
       email: ['', { validators: [Validators.required] }],
     });
   }
@@ -30,15 +29,4 @@ export class UserFormComponent implements OnInit {
   ngOnInit(): void {}
 
   user: userDTO = { id: 1, name: 'Felipe', creationDate: new Date() };
-
-  guardarImagen(event: any) {
-    if (event.target.files.length > 0) {
-      const file: File = event.target.files[0];
-      toBase64(file)
-        .then((valor: any) => {
-          this.imagenBase64 = valor as string;
-        })
-        .catch((error: any) => console.log(error));
-    }
-  }
 }

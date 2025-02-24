@@ -36,16 +36,28 @@
               class="editBtn"
               color="primary"
               mat-mini-fab
-              aria-label="Editar"
+              aria-label="Hacer Admin"
+              matTooltip="Hacer Admin"
               (click)="openForm(true)"
             >
-              <mat-icon>edit</mat-icon>
+              <mat-icon>note_add</mat-icon>
+            </button>
+            <button
+              class="editBtn"
+              color="accent"
+              mat-mini-fab
+              aria-label="Remover Admin"
+              matTooltip="Remover Admin"
+              (click)="openForm(true)"
+            >
+              <mat-icon>no_sim</mat-icon>
             </button>
             <button
               class="deleteBtn"
               color="warn"
               mat-mini-fab
               aria-label="Eliminar"
+              matTooltip="Eliminar"
               (click)="deleteDialog()"
             >
               <mat-icon>delete</mat-icon>
