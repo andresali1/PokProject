@@ -36,7 +36,10 @@ export class RegisterComponent implements OnInit {
         this.securityService.saveToken(response);
         this.router.navigate(['/']);
       },
-      (error) => (this.errors = APIErrorsParse(error))
+      (error) => {
+        this.errors = APIErrorsParse(error)
+        console.log(this.errors);
+      }
     );
   }
 

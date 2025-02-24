@@ -4,15 +4,24 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BackEnd;
 
-public class ApplicationDbContext : IdentityDbContext
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
-    public ApplicationDbContext(DbContextOptions options) : base(options)
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : base(options)
     {
     }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder builder)
     {
-        base.OnModelCreating(modelBuilder);
+        base.OnModelCreating(builder);
+
+        builder.Entity<ApplicationUser>()
+            .Property(u => u.PasswordReset)
+            .HasDefaultValue(false);
+
+        builder.Entity<ApplicationUser>()
+            .Property(u => u.Active)
+            .HasDefaultValue(true);
     }
 
     public DbSet<Tipo> Tipos { get; set; }

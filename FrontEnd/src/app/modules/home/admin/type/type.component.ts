@@ -20,7 +20,7 @@ export class TypeComponent implements OnInit {
   dataSource = DEMO_DATA_TYPE;
   cantidadTotalRegistros: any = 0;
   paginaActual = 1;
-  cantidadRegistrosAMostrar = 10;
+  cantidadRegistrosAMostrar = 5;
   errores: string[] = [];
 
   constructor(

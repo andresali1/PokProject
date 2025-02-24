@@ -1,5 +1,6 @@
 using System.Text;
 using BackEnd;
+using BackEnd.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -28,7 +29,7 @@ var fronEnd_url = builder.Configuration.GetValue<string>("Frontend_Url");
 //                 });
 //             });
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 

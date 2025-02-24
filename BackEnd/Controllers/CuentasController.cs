@@ -1,5 +1,6 @@
 using AutoMapper;
 using BackEnd.DTOs;
+using BackEnd.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -16,16 +17,16 @@ namespace BackEnd.Controllers
     [ApiController]
     public class CuentasController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<ApplicationUser> userManager;
         private readonly IConfiguration configuration;
-        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
 
         public CuentasController(
-            UserManager<IdentityUser> userManager,
+            UserManager<ApplicationUser> userManager,
             IConfiguration configuration,
-            SignInManager<IdentityUser> signInManager,
+            SignInManager<ApplicationUser> signInManager,
             ApplicationDbContext context,
             IMapper mapper
         )
@@ -80,7 +81,7 @@ namespace BackEnd.Controllers
                 return BadRequest("Correo electrónico ya registrado");
             }
 
-            var usuario = new IdentityUser { UserName = credencialesUsuario.Email, Email = credencialesUsuario.Email, EmailConfirmed = true };
+            var usuario = new ApplicationUser { UserName = credencialesUsuario.Email, Email = credencialesUsuario.Email };
             var resultado = await userManager.CreateAsync(usuario, credencialesUsuario.Password);
 
             if (resultado.Succeeded)
@@ -130,7 +131,7 @@ namespace BackEnd.Controllers
             }
 
             var user = await userManager.FindByEmailAsync(credencialesUsuario.Email);
-            user.EmailConfirmed = true;
+            user.PasswordReset = false;
             var token = await userManager.GeneratePasswordResetTokenAsync(user);
             var resultado = await userManager.ResetPasswordAsync(user, token, credencialesUsuario.Password);
 
@@ -173,8 +174,36 @@ namespace BackEnd.Controllers
             {
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
                 Expiracion = expiracion,
-                CurrentPass = usuario.EmailConfirmed
+                PasswordReset = usuario.PasswordReset
             };
+        }
+
+        /// <summary>
+        /// Método para inactivar un usuario
+        /// </summary>
+        /// <param name="idUsuario"></param>
+        /// <returns></returns>
+        [HttpPost("cuenta")]
+        public async Task<ActionResult> EliminarUsuario([FromBody] string idUsuario)
+        {
+            var usuario = await userManager.FindByIdAsync(idUsuario);
+
+            if (usuario is null)
+            {
+                return BadRequest("Usuario no encontrado");
+            }
+
+            usuario.Active = false;
+            var result = await userManager.UpdateAsync(usuario);
+
+            if (result.Succeeded)
+            {
+                return Ok("Usuario Eliminado");
+            }
+            else
+            {
+                return BadRequest(result.Errors);
+            }
         }
     }
 }
