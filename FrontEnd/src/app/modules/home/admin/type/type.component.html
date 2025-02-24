@@ -21,7 +21,7 @@
               color="primary"
               mat-mini-fab
               aria-label="Editar"
-              (click)="openForm(true)"
+              (click)="openForm(true, element.id)"
             >
               <mat-icon>edit</mat-icon>
             </button>
@@ -30,7 +30,7 @@
               color="warn"
               mat-mini-fab
               aria-label="Eliminar"
-              (click)="deleteDialog()"
+              (click)="deleteDialog(element.id)"
             >
               <mat-icon>delete</mat-icon>
             </button>

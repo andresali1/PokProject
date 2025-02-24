@@ -60,13 +60,17 @@ export class TypeComponent implements OnInit {
     this.cargarRegistros(this.paginaActual, this.cantidadRegistrosAMostrar);
   }
 
-  openForm(isEdit: boolean) {
-    const dialogRef = this.dialog.open(TypeFormComponent);
+  openForm(isEdit: boolean, recordId: number | null = null) {
+    const id: number = recordId != null ? recordId : 0;
+
+    const dialogRef = this.dialog.open(TypeFormComponent, {
+      data: { id: id },
+    });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result != '') {
         if (isEdit) {
-          console.log('Lo editaremos');
+          this.update(id, result);
         } else {
           this.create(result);
         }
@@ -82,17 +86,46 @@ export class TypeComponent implements OnInit {
       },
       (error) => {
         this.errores = APIErrorsParse(error);
-        console.log(this.errores);
         this.openSnackBar('Oops! ha ocurrido un error', 'Cerrar', false);
       }
     );
   }
 
-  deleteDialog() {
-    const dialogRef = this.dialog.open(ConfirmComponent);
+  update(typeId: number, type: typeCreationDTO) {
+    this.typeService.update(typeId, type).subscribe(
+      () => {
+        this.cargarRegistros(this.paginaActual, this.cantidadRegistrosAMostrar);
+        this.openSnackBar('Registro actualizado exitosamente', 'Cerrar', true);
+      },
+      (error) => {
+        this.errores = APIErrorsParse(error);
+        this.openSnackBar('Oops! ha ocurrido un error', 'Cerrar', false);
+      }
+    );
+  }
+
+  deleteDialog(typeId: number) {
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      data: { id: typeId },
+    });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('Eliminamos tipo ' + result);
+      if (result != '') {
+        this.delete(result);
+      }
     });
+  }
+
+  delete(typeId: number) {
+    this.typeService.delete(typeId).subscribe(
+      () => {
+        this.cargarRegistros(this.paginaActual, this.cantidadRegistrosAMostrar);
+        this.openSnackBar('Registro eliminado exitosamente', 'Cerrar', true);
+      },
+      (error) => {
+        this.errores = APIErrorsParse(error);
+        this.openSnackBar('Oops! ha ocurrido un error', 'Cerrar', false);
+      }
+    );
   }
 }

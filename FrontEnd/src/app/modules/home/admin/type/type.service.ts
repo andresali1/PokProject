@@ -29,7 +29,19 @@ export class TypeService {
     });
   }
 
+  public obtenerPorId(id: number): Observable<typeDTO> {
+    return this.http.get<typeDTO>(`${this.apiUrl}/${id}`);
+  }
+
   create(type: typeCreationDTO) {
     return this.http.post(this.apiUrl, type);
+  }
+
+  update(typeId: number, type: typeCreationDTO) {
+    return this.http.put(`${this.apiUrl}/${typeId}`, type);
+  }
+
+  delete(typeId: number) {
+    return this.http.delete(`${this.apiUrl}/${typeId}`);
   }
 }
