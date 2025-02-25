@@ -27,12 +27,21 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Tipo</mat-label>
-          <input formControlName="type" matInput />
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">
+              {{ tipo.nombre }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
 
-        <div class="buttons" *ngIf="!isEdit">
+        <div class="buttons" *ngIf="fromAdmin">
           <a mat-stroked-button color="warn" (click)="cancel()">Cancelar</a>
-          <button mat-flat-button color="primary" [disabled]="form.invalid">
+          <button
+            mat-flat-button
+            color="primary"
+            [disabled]="form.invalid"
+            (click)="save(form.value)"
+          >
             Crear
           </button>
         </div>

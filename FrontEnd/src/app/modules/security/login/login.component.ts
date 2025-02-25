@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit {
   }
 
   getLogin(credentials: userCredentials) {
+    console.log('Entramos a login');
     this.securityService.login(credentials).subscribe(
       (response) => {
         let isPasswordReset: string =

@@ -54,13 +54,16 @@ export class UsersComponent implements OnInit {
     const dialogRef = this.dialog.open(UserFormComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.create(result);
+      if (result != '' && result != null) {
+        this.create(result);
+      }
     });
   }
 
   create(user: userCreationDTO) {
     this.userService.create(user).subscribe(
       () => {
+        this.cargarRegistros(this.paginaActual, this.cantidadRegistrosAMostrar);
         this.openSnackBar('Usuario creado exitosamente', 'Cerrar', true);
       },
       (error) => {

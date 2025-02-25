@@ -13,6 +13,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSelectModule } from '@angular/material/select';
+('@angular/material');
 
 @NgModule({
   declarations: [],
@@ -29,6 +31,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatMenuModule,
     MatSnackBarModule,
     MatTooltipModule,
+    MatSelectModule,
   ],
   imports: [CommonModule],
 })

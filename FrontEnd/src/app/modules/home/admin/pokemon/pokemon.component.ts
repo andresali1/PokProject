@@ -40,12 +40,14 @@ export class PokemonComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
+      console.log('Mira Felipe', result);
 
-      if (isEdit) {
-        console.log('Lo editaremos');
-      } else {
-        console.log('Lo crearemos');
+      if (result != '') {
+        if (isEdit) {
+          console.log('Lo editaremos');
+        } else {
+          console.log('Lo crearemos');
+        }
       }
     });
   }

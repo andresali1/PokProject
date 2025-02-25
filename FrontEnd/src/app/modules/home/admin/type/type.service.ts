@@ -29,6 +29,10 @@ export class TypeService {
     });
   }
 
+  obtenerListado() {
+    return this.http.get<typeDTO[]>(`${this.apiUrl}/all`);
+  }
+
   public obtenerPorId(id: number): Observable<typeDTO> {
     return this.http.get<typeDTO>(`${this.apiUrl}/${id}`);
   }

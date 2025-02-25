@@ -38,6 +38,17 @@ namespace Back_end.Controllers
         }
 
         /// <summary>
+        /// Se consultan todos los tipos para Select
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("all")]
+        public async Task<ActionResult<List<TipoDTO>>> GetAll()
+        {
+            var tipos = await context.Tipos.ToListAsync();
+            return mapper.Map<List<TipoDTO>>(tipos);
+        }
+
+        /// <summary>
         /// Se obtiene el tipo por su Id
         /// </summary>
         /// <param name="id"></param>
