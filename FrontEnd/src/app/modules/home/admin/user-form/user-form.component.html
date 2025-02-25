@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Formualrio Usuario</h2>
+<h2 mat-dialog-title>Formulario Usuario</h2>
 <mat-dialog-content class="mat-typography">
   <form [formGroup]="form">
     <mat-form-field appearance="outline">
@@ -12,7 +12,7 @@
   <button
     mat-raised-button
     color="primary"
-    [mat-dialog-close]="user"
+    [mat-dialog-close]="form.value"
     cdkFocusInitial
   >
     Guardar

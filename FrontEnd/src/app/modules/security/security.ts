@@ -1,6 +1,7 @@
 export interface userCredentials {
   email: string;
   password: string;
+  fromAdmin: boolean;
 }
 
 export interface userCredentialsRecover extends userCredentials {

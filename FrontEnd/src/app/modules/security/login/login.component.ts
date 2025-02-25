@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   hide: boolean = true;
   errors: string[] = [];
+  isFirstLogin: boolean = false;
+  defaultEmail: string = '';
 
   constructor(
     private formbuilder: FormBuilder,
@@ -54,14 +56,20 @@ export class LoginComponent implements OnInit {
   getLogin(credentials: userCredentials) {
     this.securityService.login(credentials).subscribe(
       (response) => {
-        console.log('desde login');
-        console.log(response);
-        this.securityService.saveToken(response);
-        this.router.navigate(['/']);
+        let isPasswordReset: string =
+          this.securityService.getPasswordResetInToken(response);
+
+        if (isPasswordReset === 'True') {
+          this.securityService.saveEmail(credentials.email);
+          this.isFirstLogin = true;
+        } else {
+          this.isFirstLogin = false;
+          this.securityService.saveToken(response);
+          this.router.navigate(['/']);
+        }
       },
       (error) => {
         this.errors = APIErrorsParse(error);
-        console.log('Mira Felipe: ');
         console.log(this.errors);
       }
     );
@@ -72,6 +80,6 @@ export class LoginComponent implements OnInit {
   }
 
   getRecover() {
-    this.router.navigate(['/auth/recover']);
+    this.isFirstLogin = true;
   }
 }

@@ -25,6 +25,14 @@ table {
   text-align: left;
 }
 
+mat-icon.check {
+  color: #1fdf1f;
+}
+
+mat-icon.close {
+  color: #e95848;
+}
+
 .botones {
   display: flex;
   justify-content: space-around;

@@ -1,6 +1,7 @@
 using AutoMapper;
 using BackEnd.DTOs;
 using BackEnd.Entities;
+using BackEnd.Utilities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -38,13 +39,24 @@ namespace BackEnd.Controllers
             this.mapper = mapper;
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult<List<UsuarioDTO>>> Get([FromQuery] PaginacionDTO paginacionDTO)
+        {
+            var queryable = context.Users.AsQueryable();
+            await HttpContext.InsertarParametrosPaginacionEnCabecera(queryable);
+            var users = await queryable.OrderBy(x => x.Email).Paginar(paginacionDTO).ToListAsync();
+            var respuesta = mapper.Map<List<UsuarioDTO>>(users);
+            return respuesta;
+        }
+
         /// <summary>
         /// Método para hacer admin a un usuario
         /// </summary>
         /// <param name="usuarioId"></param>
         /// <returns></returns>
         [HttpPost("hacerAdmin")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "EsAdmin")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "EsAdmin")]
         public async Task<ActionResult> HacerAdmin([FromBody] string usuarioId)
         {
             var usuario = await userManager.FindByIdAsync(usuarioId);
@@ -58,7 +70,7 @@ namespace BackEnd.Controllers
         /// <param name="usuarioId"></param>
         /// <returns></returns>
         [HttpPost("removerAdmin")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "EsAdmin")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "EsAdmin")]
         public async Task<ActionResult> RemoverAdmin([FromBody] string usuarioId)
         {
             var usuario = await userManager.FindByIdAsync(usuarioId);
@@ -81,7 +93,7 @@ namespace BackEnd.Controllers
                 return BadRequest("Correo electrónico ya registrado");
             }
 
-            var usuario = new ApplicationUser { UserName = credencialesUsuario.Email, Email = credencialesUsuario.Email };
+            var usuario = new ApplicationUser { UserName = credencialesUsuario.Email, Email = credencialesUsuario.Email, PasswordReset = credencialesUsuario.FromAdmin };
             var resultado = await userManager.CreateAsync(usuario, credencialesUsuario.Password);
 
             if (resultado.Succeeded)
@@ -161,6 +173,7 @@ namespace BackEnd.Controllers
             var claimsDb = await userManager.GetClaimsAsync(usuario);
 
             claims.AddRange(claimsDb);
+            claims.Add(new Claim("isReset", usuario.PasswordReset.ToString()));
 
             var llave = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["llaveJwt"]));
             var creds = new SigningCredentials(llave, SecurityAlgorithms.HmacSha256);
@@ -198,7 +211,7 @@ namespace BackEnd.Controllers
 
             if (result.Succeeded)
             {
-                return Ok("Usuario Eliminado");
+                return Ok();
             }
             else
             {

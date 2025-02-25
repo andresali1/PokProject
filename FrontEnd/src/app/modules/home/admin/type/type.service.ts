@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { typeCreationDTO, typeDTO } from '../type';
+import { typeCreationDTO, typeDTO } from './type';
 import { Observable } from 'rxjs';
 
 @Injectable({

@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { typeCreationDTO, typeDTO } from '../type';
+import { typeCreationDTO, typeDTO } from '../type/type';
 import { TypeService } from '../type/type.service';
 import { APIErrorsParse } from 'src/app/modules/utilidades/utilidades';
 

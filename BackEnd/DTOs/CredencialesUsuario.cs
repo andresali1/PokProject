@@ -9,4 +9,5 @@ public class CredencialesUsuario
 
     [Required]
     public string Password { get; set; }
+    public bool FromAdmin { get; set; } = false;
 }

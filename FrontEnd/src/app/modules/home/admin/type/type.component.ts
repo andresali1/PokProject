@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DEMO_DATA_TYPE, typeCreationDTO, typeDTO } from '../type';
+import { typeCreationDTO, typeDTO } from './type';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { TypeFormComponent } from '../type-form/type-form.component';
@@ -17,7 +17,6 @@ import { HttpResponse } from '@angular/common/http';
 export class TypeComponent implements OnInit {
   tipos: typeDTO[] = [];
   displayedColumns: string[] = ['nombre', 'action'];
-  dataSource = DEMO_DATA_TYPE;
   cantidadTotalRegistros: any = 0;
   paginaActual = 1;
   cantidadRegistrosAMostrar = 5;

@@ -14,6 +14,7 @@ export class RecoverComponent implements OnInit {
   form: FormGroup;
   hide: boolean = true;
   errors: string[] = [];
+  defaultEmail: string | null = '';
 
   constructor(
     private formbuilder: FormBuilder,
@@ -25,6 +26,16 @@ export class RecoverComponent implements OnInit {
       password: ['', { validators: [Validators.required] }],
       re_password: ['', { validators: [Validators.required] }],
     });
+
+    this.defaultEmail = this.securityService.getEmail();
+
+    if (this.defaultEmail != null) {
+      this.form.patchValue({
+        email: this.defaultEmail,
+      });
+    }
+
+    this.securityService.removeEmail();
   }
 
   ngOnInit(): void {}
@@ -36,12 +47,11 @@ export class RecoverComponent implements OnInit {
       const credentials: userCredentials = {
         email: formCredentials.email,
         password: formCredentials.password,
+        fromAdmin: false,
       };
 
       this.securityService.recover(credentials).subscribe(
         (response) => {
-          console.log('desde recover');
-          console.log(response);
           this.securityService.saveToken(response);
           this.router.navigate(['/']);
         },

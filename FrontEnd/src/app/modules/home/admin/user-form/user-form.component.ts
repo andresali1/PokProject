@@ -1,9 +1,7 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { userDTO } from '../user';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { toBase64 } from 'src/app/modules/utilidades/utilidades';
 
 @Component({
   selector: 'app-user-form',
@@ -27,6 +25,4 @@ export class UserFormComponent implements OnInit {
   }
 
   ngOnInit(): void {}
-
-  user: userDTO = { id: 1, name: 'Felipe', creationDate: new Date() };
 }

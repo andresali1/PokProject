@@ -11,6 +11,7 @@ import { jwtDecode } from 'jwt-decode';
 export class SecurityService {
   private apiUrl = environment.apiUrl + 'cuentas';
   private readonly tokenKey = 'token';
+  private readonly emailKey = 'email';
   private readonly expirationKey = 'token-expiracion';
 
   constructor(private httpClient: HttpClient) {}
@@ -37,6 +38,18 @@ export class SecurityService {
     );
   }
 
+  saveEmail(email: string) {
+    localStorage.setItem(this.emailKey, email);
+  }
+
+  removeEmail() {
+    localStorage.removeItem(this.emailKey);
+  }
+
+  getEmail() {
+    return localStorage.getItem(this.emailKey);
+  }
+
   logout() {
     localStorage.removeItem(this.tokenKey);
     localStorage.removeItem(this.expirationKey);
@@ -46,7 +59,7 @@ export class SecurityService {
     return localStorage.getItem(this.tokenKey);
   }
 
-  getUserEmail() {
+  getUserEmail(): string {
     const token = this.getToken();
     let result: string = '';
 
@@ -56,6 +69,26 @@ export class SecurityService {
         const email = decodedToken.email;
 
         result = email;
+      } catch (error) {
+        result = '';
+      }
+    }
+
+    return result;
+  }
+
+  getPasswordResetInToken(
+    authenticationResponse: authenticationResponse
+  ): string {
+    let token: string = authenticationResponse.token;
+    let result: string = '';
+
+    if (token != null) {
+      try {
+        const decodedToken: any = jwtDecode(token);
+        const isReset = decodedToken.isReset;
+
+        result = isReset;
       } catch (error) {
         result = '';
       }

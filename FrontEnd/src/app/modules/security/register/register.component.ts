@@ -31,8 +31,6 @@ export class RegisterComponent implements OnInit {
   getRegister(credentials: userCredentials) {
     this.securityService.register(credentials).subscribe(
       (response) => {
-        console.log('desde register');
-        console.log(response);
         this.securityService.saveToken(response);
         this.router.navigate(['/']);
       },
