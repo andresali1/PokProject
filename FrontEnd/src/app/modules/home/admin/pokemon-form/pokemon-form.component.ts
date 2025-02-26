@@ -38,7 +38,6 @@ export class PokemonFormComponent implements OnInit {
     this.objPokemon = pokemon;
 
     this.cdr.detectChanges();
-    console.log(this.objPokemon);
 
     let element: HTMLElement = document.getElementById(
       'saveBtn'

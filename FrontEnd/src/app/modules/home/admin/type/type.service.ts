@@ -12,7 +12,7 @@ export class TypeService {
 
   constructor(private http: HttpClient) {}
 
-  public obtenerTodos(
+  public obtenerPaginado(
     pagina: number,
     cantidadRegistrosAMostrar: number
   ): Observable<any> {

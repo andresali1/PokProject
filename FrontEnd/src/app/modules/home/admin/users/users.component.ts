@@ -104,18 +104,13 @@ export class UsersComponent implements OnInit {
   }
 
   eliminar(usuarioId: string) {
-    console.log('Entramos a eliminar');
-
     this.userService.eliminar(usuarioId).subscribe(
       (response) => {
-        console.log('Tu respuesta: ', response);
         this.cargarRegistros(this.paginaActual, this.cantidadRegistrosAMostrar);
         this.openSnackBar('Usuario eliminado exitosamente', 'Cerrar', true);
       },
-      (error) => {
-        console.log(error);
-        this.openSnackBar('Oops! ha ocurrido un error', 'Cerrar', false);
-      }
+      (error) =>
+        this.openSnackBar('Oops! ha ocurrido un error', 'Cerrar', false)
     );
   }
 

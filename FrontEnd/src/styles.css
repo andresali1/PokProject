@@ -24,3 +24,7 @@ body {
 .fail-snackbar button {
   color: #fff;
 }
+
+.tableHeader {
+  text-align: center !important;
+}

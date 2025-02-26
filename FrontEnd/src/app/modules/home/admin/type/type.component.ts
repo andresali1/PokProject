@@ -33,15 +33,17 @@ export class TypeComponent implements OnInit {
   }
 
   cargarRegistros(pagina: number, cantidadRegistrosAMostrar: any) {
-    this.typeService.obtenerTodos(pagina, cantidadRegistrosAMostrar).subscribe(
-      (respuesta: HttpResponse<typeDTO[]>) => {
-        this.tipos = respuesta.body!;
-        this.cantidadTotalRegistros = respuesta.headers.get(
-          'cantidadTotalRegistros'
-        );
-      },
-      (error) => console.error(error)
-    );
+    this.typeService
+      .obtenerPaginado(pagina, cantidadRegistrosAMostrar)
+      .subscribe(
+        (respuesta: HttpResponse<typeDTO[]>) => {
+          this.tipos = respuesta.body!;
+          this.cantidadTotalRegistros = respuesta.headers.get(
+            'cantidadTotalRegistros'
+          );
+        },
+        (error) => console.error(error)
+      );
   }
 
   openSnackBar(message: string, action: string, success: boolean) {

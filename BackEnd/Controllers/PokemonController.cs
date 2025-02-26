@@ -5,6 +5,7 @@ using BackEnd.Entities;
 using BackEnd.Utilities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Back_end.Controllers
 {
@@ -24,6 +25,20 @@ namespace Back_end.Controllers
             this.mapper = mapper;
             this.almacenadorArchivos = almacenadorArchivos;
             this.userManager = userManager;
+        }
+
+        /// <summary>
+        /// Método para traer los pokemon paginados
+        /// </summary>
+        /// <param name="paginacionDTO"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ActionResult<List<PokemonDTO>>> Get([FromQuery] PaginacionDTO paginacionDTO)
+        {
+            var queryable = context.Pokemons.Include(p => p.Tipo).AsQueryable();
+            await HttpContext.InsertarParametrosPaginacionEnCabecera(queryable);
+            var pokemons = await queryable.OrderBy(x => x.Pokedex).Paginar(paginacionDTO).ToListAsync();
+            return mapper.Map<List<PokemonDTO>>(pokemons);
         }
 
         /// <summary>

@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { PokemonCreationDTO } from './pokemon';
 import { Observable } from 'rxjs';
+import { pokemonDTO } from '../admin/pokemon';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,23 @@ export class PokemonService {
   private apiUrl = environment.apiUrl + 'pokemon';
 
   constructor(private http: HttpClient) {}
+
+  public obtenerPaginado(
+      pagina: number,
+      cantidadRegistrosAMostrar: number
+    ): Observable<any> {
+      let params = new HttpParams();
+      params = params.append('pagina', pagina.toString());
+      params = params.append(
+        'recordsPorPagina',
+        cantidadRegistrosAMostrar.toString()
+      );
+  
+      return this.http.get<pokemonDTO[]>(this.apiUrl, {
+        observe: 'response',
+        params,
+      });
+    }
 
   crear(pokemon: PokemonCreationDTO): Observable<number> {
     const formData = this.construirFormData(pokemon);

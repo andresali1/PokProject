@@ -1,3 +1,5 @@
+import { typeDTO } from '../admin/type/type';
+
 export interface PokemonCreationDTO {
   pokedex: number;
   nombre: string;
@@ -10,4 +12,5 @@ export interface PokemonDTO {
   nombre: string;
   tipoId: number;
   image: string;
+  tipo: typeDTO;
 }

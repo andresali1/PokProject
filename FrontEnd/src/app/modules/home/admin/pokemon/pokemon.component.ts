@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DEMO_DATA_POKEMON } from '../pokemon';
+import { DEMO_DATA_POKEMON, pokemonDTO } from '../pokemon';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { PokemonFormComponent } from '../pokemon-form/pokemon-form.component';
@@ -8,6 +8,7 @@ import { PokemonService } from '../../create/pokemon.service';
 import { PokemonCreationDTO } from '../../create/pokemon';
 import { APIErrorsParse } from 'src/app/modules/utilidades/utilidades';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-pokemon',
@@ -15,16 +16,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./pokemon.component.css'],
 })
 export class PokemonComponent implements OnInit {
-  displayedColumns: string[] = [
-    'pokedex',
-    'name',
-    'type',
-    'creationDate',
-    'creationUser',
-    'action',
-  ];
+  pokemons: pokemonDTO[] = [];
+  displayedColumns: string[] = ['pokedex', 'image', 'name', 'type', 'action'];
   dataSource = DEMO_DATA_POKEMON;
-  cantidadTotalRegistros = 11;
+  cantidadTotalRegistros: any = 0;
   paginaActual = 1;
   cantidadRegistrosAMostrar = 10;
   errores: string[] = [];
@@ -35,7 +30,25 @@ export class PokemonComponent implements OnInit {
     private _snackBar: MatSnackBar
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.cargarRegistros(this.paginaActual, this.cantidadRegistrosAMostrar);
+  }
+
+  cargarRegistros(pagina: number, cantidadRegistrosAMostrar: any) {
+    this.pokemonService
+      .obtenerPaginado(pagina, cantidadRegistrosAMostrar)
+      .subscribe(
+        (respuesta: HttpResponse<pokemonDTO[]>) => {
+          this.pokemons = respuesta.body!;
+          console.log('Desde admin');
+          console.log(this.pokemons);
+          this.cantidadTotalRegistros = respuesta.headers.get(
+            'cantidadTotalRegistros'
+          );
+        },
+        (error) => console.error(error)
+      );
+  }
 
   actualizarPaginacion(datos: PageEvent) {
     this.paginaActual = datos.pageIndex + 1;
@@ -49,8 +62,6 @@ export class PokemonComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('Mira Felipe', result);
-
       if (result != '') {
         if (isEdit) {
           console.log('Lo editaremos');

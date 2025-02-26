@@ -1,3 +1,5 @@
+using BackEnd.Entities;
+
 namespace BackEnd.DTOs;
 
 public class PokemonDTO
@@ -6,4 +8,5 @@ public class PokemonDTO
     public string Nombre { get; set; }
     public string Image { get; set; }
     public int TipoId { get; set; }
+    public Tipo Tipo { get; set; }
 }
