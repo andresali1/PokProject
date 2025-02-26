@@ -13,7 +13,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TypeService } from '../../home/admin/type/type.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { typeDTO } from '../../home/admin/type/type';
-import { PokemonCreationDTO } from '../../home/pokemon';
+import { PokemonCreationDTO } from '../../home/create/pokemon';
 
 @Component({
   selector: 'app-form-pokemon',
@@ -33,7 +33,6 @@ export class FormPokemonComponent implements OnInit {
 
   constructor(
     private formbuilder: FormBuilder,
-    private router: Router,
     private typeService: TypeService,
     private _snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<FormPokemonComponent>,
@@ -41,9 +40,9 @@ export class FormPokemonComponent implements OnInit {
   ) {
     this.form = this.formbuilder.group({
       pokedex: ['', { validators: [Validators.required] }],
-      name: ['', { validators: [Validators.required] }],
-      type: ['', { validators: [Validators.required] }],
-      image: [''],
+      nombre: ['', { validators: [Validators.required] }],
+      tipoId: ['', { validators: [Validators.required] }],
+      image: '',
     });
   }
 
@@ -65,24 +64,18 @@ export class FormPokemonComponent implements OnInit {
       toBase64(file)
         .then((valor: any) => {
           this.imagenBase64 = valor as string;
+          this.form.get('image')?.setValue(file);
         })
         .catch((error: any) => console.log(error));
     }
   }
 
   save(pokemon: PokemonCreationDTO) {
-    if (this.imagenBase64 != '' && this.imagenBase64 != null) {
-      pokemon.image = this.imagenBase64;
-    }
-
     this.pokemonSave.emit(pokemon);
   }
 
   cancel() {
     this.modalClose.emit(true);
-    /*
-    this.router.navigate(['/home/list']);
-    */
   }
 
   openSnackBar(message: string, action: string, success: boolean) {

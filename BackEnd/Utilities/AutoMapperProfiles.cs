@@ -12,6 +12,10 @@ namespace BackEnd.Utilities
             CreateMap<Tipo, TipoDTO>().ReverseMap();
             CreateMap<TipoCreacionDTO, Tipo>();
 
+            CreateMap<PokemonCreationDTO, Pokemon>()
+                .ForMember(x => x.Image, opciones => opciones.Ignore());
+            CreateMap<Pokemon, PokemonDTO>();
+
             CreateMap<ApplicationUser, UsuarioDTO>();
         }
     }

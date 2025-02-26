@@ -22,7 +22,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         builder.Entity<ApplicationUser>()
             .Property(u => u.Active)
             .HasDefaultValue(true);
+
+        builder.Entity<Pokemon>().Property(p => p.Pokedex).ValueGeneratedNever();
     }
 
     public DbSet<Tipo> Tipos { get; set; }
+    public DbSet<Pokemon> Pokemons { get; set; }
 }

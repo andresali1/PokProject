@@ -6,10 +6,8 @@ import {
   Output,
 } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { TypeService } from '../type/type.service';
-import { typeDTO } from '../type/type';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { PokemonCreationDTO } from '../../pokemon';
+import { PokemonCreationDTO } from '../../create/pokemon';
 
 @Component({
   selector: 'app-pokemon-form',
@@ -17,7 +15,12 @@ import { PokemonCreationDTO } from '../../pokemon';
   styleUrls: ['./pokemon-form.component.css'],
 })
 export class PokemonFormComponent implements OnInit {
-  objPokemon: PokemonCreationDTO = { pokedex: 0, name: '', type: 0, image: '' };
+  objPokemon: PokemonCreationDTO = {
+    pokedex: 0,
+    nombre: '',
+    tipoId: 0,
+    image: null,
+  };
   isEdit: boolean = true;
 
   constructor(
@@ -35,6 +38,7 @@ export class PokemonFormComponent implements OnInit {
     this.objPokemon = pokemon;
 
     this.cdr.detectChanges();
+    console.log(this.objPokemon);
 
     let element: HTMLElement = document.getElementById(
       'saveBtn'
