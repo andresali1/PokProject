@@ -7,13 +7,13 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { toBase64 } from '../utilidades';
-import { Router } from '@angular/router';
+import { APIErrorsParse, toBase64 } from '../utilidades';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TypeService } from '../../home/admin/type/type.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { typeDTO } from '../../home/admin/type/type';
-import { PokemonCreationDTO } from '../../home/create/pokemon';
+import { PokemonCreationDTO, PokemonDTO } from '../../home/create/pokemon';
+import { PokemonService } from '../../home/create/pokemon.service';
 
 @Component({
   selector: 'app-form-pokemon',
@@ -21,19 +21,30 @@ import { PokemonCreationDTO } from '../../home/create/pokemon';
   styleUrls: ['./form-pokemon.component.css'],
 })
 export class FormPokemonComponent implements OnInit {
+  objPokemon: PokemonDTO = {
+    pokedex: 0,
+    nombre: '',
+    tipoId: 0,
+    image: '',
+    tipo: null,
+  };
   imagenBase64: string = '';
   form: FormGroup;
   tipos: typeDTO[] = [];
   @Input() isEdit: boolean = false;
   @Input() fromAdmin: boolean = false;
+  @Input() pokemonId: number = 0;
   @Output()
   pokemonSave: EventEmitter<PokemonCreationDTO> =
     new EventEmitter<PokemonCreationDTO>();
   @Output() modalClose: EventEmitter<boolean> = new EventEmitter<boolean>();
+  errors: string[] = [];
+  imagenCambiada: boolean = false;
 
   constructor(
     private formbuilder: FormBuilder,
     private typeService: TypeService,
+    private pokemonService: PokemonService,
     private _snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<FormPokemonComponent>,
     @Inject(MAT_DIALOG_DATA) public data: string
@@ -47,6 +58,11 @@ export class FormPokemonComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.pokemonId > 0) {
+      this.isEdit = true;
+      this.obtenerPorId(this.pokemonId);
+    }
+
     this.typeService.obtenerListado().subscribe(
       (response) => {
         this.tipos = response;
@@ -58,6 +74,24 @@ export class FormPokemonComponent implements OnInit {
     );
   }
 
+  obtenerPorId(id: number) {
+    this.pokemonService.obtenerPorId(id).subscribe(
+      (data) => {
+        this.objPokemon = data;
+        this.form.patchValue({
+          pokedex: this.objPokemon.pokedex,
+          nombre: this.objPokemon.nombre,
+          tipoId: this.objPokemon.tipoId,
+          image: this.objPokemon.image,
+        });
+      },
+      (error) => {
+        this.errors = APIErrorsParse(error);
+        this.dialogRef.close();
+      }
+    );
+  }
+
   guardarImagen(event: any) {
     if (event.target.files.length > 0) {
       const file: File = event.target.files[0];
@@ -65,6 +99,7 @@ export class FormPokemonComponent implements OnInit {
         .then((valor: any) => {
           this.imagenBase64 = valor as string;
           this.form.get('image')?.setValue(file);
+          this.imagenCambiada = true;
         })
         .catch((error: any) => console.log(error));
     }

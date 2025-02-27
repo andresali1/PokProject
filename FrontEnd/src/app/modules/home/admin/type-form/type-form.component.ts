@@ -29,20 +29,24 @@ export class TypeFormComponent implements OnInit {
 
     if (data.id > 0) {
       this.label = 'Actualizar';
-      this.typeService.obtenerPorId(data.id).subscribe(
-        (data) => {
-          this.objTipo = data;
-          this.form.patchValue({
-            nombre: this.objTipo.nombre,
-          });
-        },
-        (error) => {
-          this.errors = APIErrorsParse(error);
-          this.dialogRef.close();
-        }
-      );
+      this.obtenerPorId(data.id);
     }
   }
 
   ngOnInit(): void {}
+
+  obtenerPorId(id: number) {
+    this.typeService.obtenerPorId(id).subscribe(
+      (data) => {
+        this.objTipo = data;
+        this.form.patchValue({
+          nombre: this.objTipo.nombre,
+        });
+      },
+      (error) => {
+        this.errors = APIErrorsParse(error);
+        this.dialogRef.close();
+      }
+    );
+  }
 }

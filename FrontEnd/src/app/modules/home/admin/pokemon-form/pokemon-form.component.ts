@@ -21,15 +21,17 @@ export class PokemonFormComponent implements OnInit {
     tipoId: 0,
     image: null,
   };
-  isEdit: boolean = true;
+  isEdit: boolean = false;
+  pokemonId: number = 0;
 
   constructor(
     private cdr: ChangeDetectorRef,
     private _snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<PokemonFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: { id: number; isEdit: boolean }
   ) {
-    this.isEdit = data.isEdit;
+    this.pokemonId = data.id;
+    this.isEdit = this.isEdit;
   }
 
   ngOnInit(): void {}

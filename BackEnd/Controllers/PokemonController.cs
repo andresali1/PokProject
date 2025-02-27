@@ -42,6 +42,21 @@ namespace Back_end.Controllers
         }
 
         /// <summary>
+        /// Se obtiene pokemon por su número de pokedex
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<PokemonDTO>> Get(int id)
+        {
+            var pokemon = await context.Pokemons.FirstOrDefaultAsync(x => x.Pokedex == id);
+
+            if (pokemon == null) return NotFound();
+
+            return mapper.Map<PokemonDTO>(pokemon);
+        }
+
+        /// <summary>
         /// Método para crear un Pokemon
         /// </summary>
         /// <param name="pokemonCreationDTO"></param>
@@ -59,6 +74,56 @@ namespace Back_end.Controllers
             context.Add(pokemon);
             await context.SaveChangesAsync();
             return pokemon.Pokedex;
+        }
+
+        /// <summary>
+        /// Método para actualizar un pokemon
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pokemonCreationDTO"></param>
+        /// <returns></returns>
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> Put(int id, [FromForm] PokemonCreationDTO pokemonCreationDTO)
+        {
+            var pokemon = await context.Pokemons.FirstOrDefaultAsync(x => x.Pokedex == id);
+            string viejaImagen = pokemon.Image;
+
+            if (pokemon == null) return NotFound();
+
+            pokemon = mapper.Map(pokemonCreationDTO, pokemon);
+
+            if (pokemonCreationDTO.Image is not null)
+            {
+                pokemon.Image = await almacenadorArchivos.EditaArchivo(contenedor, pokemonCreationDTO.Image, viejaImagen);
+            }
+
+            await context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Método para eliminar un pokemon
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var pokemon = await context.Pokemons.FirstOrDefaultAsync(x => x.Pokedex == id);
+
+            if (pokemon is null) return NotFound();
+
+            if (!string.IsNullOrEmpty(pokemon.Image))
+            {
+                await almacenadorArchivos.BorrarArchivo(pokemon.Image, contenedor);
+            }
+
+            context.Pokemons.Remove(pokemon);
+            await context.SaveChangesAsync();
+
+            return NoContent();
+
         }
     }
 }

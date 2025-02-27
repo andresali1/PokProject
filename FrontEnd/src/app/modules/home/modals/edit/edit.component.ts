@@ -1,5 +1,4 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { pokemonDTO } from '../../admin/pokemon';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -19,12 +18,4 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit(): void {}
-
-  pokemon: pokemonDTO = {
-    pokedex: 1,
-    name: 'pikachu',
-    type: 'fire',
-    creationDate: new Date(),
-    creationUser: 'usuario1',
-  };
 }

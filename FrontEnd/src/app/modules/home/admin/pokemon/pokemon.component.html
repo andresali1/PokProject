@@ -21,7 +21,7 @@
               [src]="
                 element.image
                   ? element.image
-                  : '../../../../../assets/img/default.jpg'
+                  : '../../../../../assets/img/default.webp'
               "
               alt=""
             />
@@ -51,7 +51,7 @@
               color="primary"
               mat-mini-fab
               aria-label="Editar"
-              (click)="openForm(true)"
+              (click)="openForm(true, element.pokedex)"
             >
               <mat-icon>edit</mat-icon>
             </button>
@@ -60,7 +60,7 @@
               color="warn"
               mat-mini-fab
               aria-label="Eliminar"
-              (click)="deleteDialog()"
+              (click)="deleteDialog(element.pokedex)"
             >
               <mat-icon>delete</mat-icon>
             </button>

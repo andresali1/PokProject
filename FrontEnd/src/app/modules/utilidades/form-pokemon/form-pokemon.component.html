@@ -1,8 +1,11 @@
 <div class="content">
   <div class="imageForm">
     <div class="imageForm-display">
-      <div class="image" *ngIf="imagenBase64">
-        <img [src]="imagenBase64" alt="Pokemon Img" />
+      <div class="image" *ngIf="objPokemon.image || imagenBase64">
+        <img
+          [src]="imagenCambiada ? imagenBase64 : objPokemon.image"
+          alt="Pokemon Img"
+        />
       </div>
     </div>
     <div class="uploadBtn">
@@ -17,7 +20,7 @@
       <form [formGroup]="form">
         <mat-form-field appearance="outline">
           <mat-label>Número pokedex</mat-label>
-          <input formControlName="pokedex" matInput />
+          <input [readonly]="isEdit" formControlName="pokedex" matInput />
         </mat-form-field>
 
         <mat-form-field appearance="outline">

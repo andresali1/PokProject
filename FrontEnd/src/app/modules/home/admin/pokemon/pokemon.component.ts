@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { DEMO_DATA_POKEMON, pokemonDTO } from '../pokemon';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { PokemonFormComponent } from '../pokemon-form/pokemon-form.component';
 import { ConfirmComponent } from '../../modals/confirm/confirm.component';
 import { PokemonService } from '../../create/pokemon.service';
-import { PokemonCreationDTO } from '../../create/pokemon';
+import { PokemonCreationDTO, PokemonDTO } from '../../create/pokemon';
 import { APIErrorsParse } from 'src/app/modules/utilidades/utilidades';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpResponse } from '@angular/common/http';
@@ -16,9 +15,8 @@ import { HttpResponse } from '@angular/common/http';
   styleUrls: ['./pokemon.component.css'],
 })
 export class PokemonComponent implements OnInit {
-  pokemons: pokemonDTO[] = [];
+  pokemons: PokemonDTO[] = [];
   displayedColumns: string[] = ['pokedex', 'image', 'name', 'type', 'action'];
-  dataSource = DEMO_DATA_POKEMON;
   cantidadTotalRegistros: any = 0;
   paginaActual = 1;
   cantidadRegistrosAMostrar = 10;
@@ -38,7 +36,7 @@ export class PokemonComponent implements OnInit {
     this.pokemonService
       .obtenerPaginado(pagina, cantidadRegistrosAMostrar)
       .subscribe(
-        (respuesta: HttpResponse<pokemonDTO[]>) => {
+        (respuesta: HttpResponse<PokemonDTO[]>) => {
           this.pokemons = respuesta.body!;
           console.log('Desde admin');
           console.log(this.pokemons);
@@ -53,18 +51,20 @@ export class PokemonComponent implements OnInit {
   actualizarPaginacion(datos: PageEvent) {
     this.paginaActual = datos.pageIndex + 1;
     this.cantidadRegistrosAMostrar = datos.pageSize;
-    //this.cargarRegistros(this.paginaActual, this.cantidadRegistrosAMostrar);
+    this.cargarRegistros(this.paginaActual, this.cantidadRegistrosAMostrar);
   }
 
-  openForm(isEdit: boolean) {
+  openForm(isEdit: boolean, pokedex: number | null = null) {
+    const id: number = pokedex != null ? pokedex : 0;
+
     const dialogRef = this.dialog.open(PokemonFormComponent, {
-      data: { isEdit: isEdit },
+      data: { id: id, isEdit: isEdit },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result != '') {
         if (isEdit) {
-          console.log('Lo editaremos');
+          this.update(id, result);
         } else {
           this.create(result);
         }
@@ -75,23 +75,52 @@ export class PokemonComponent implements OnInit {
   create(pokemon: PokemonCreationDTO) {
     this.pokemonService.crear(pokemon).subscribe(
       () => {
-        //this.cargarRegistros(this.paginaActual, this.cantidadRegistrosAMostrar);
+        this.cargarRegistros(this.paginaActual, this.cantidadRegistrosAMostrar);
         this.openSnackBar('Registro guardado exitosamente', 'Cerrar', true);
       },
       (error) => {
-        console.log(error);
         this.errores = APIErrorsParse(error);
         this.openSnackBar('Oops! ha ocurrido un error', 'Cerrar', false);
       }
     );
   }
 
-  deleteDialog() {
-    const dialogRef = this.dialog.open(ConfirmComponent);
+  update(pokemonId: number, pokemon: PokemonCreationDTO) {
+    this.pokemonService.editar(pokemonId, pokemon).subscribe(
+      () => {
+        this.cargarRegistros(this.paginaActual, this.cantidadRegistrosAMostrar);
+        this.openSnackBar('Registro actualizado exitosamente', 'Cerrar', true);
+      },
+      (error) => {
+        this.errores = APIErrorsParse(error);
+        this.openSnackBar('Oops! ha ocurrido un error', 'Cerrar', false);
+      }
+    );
+  }
+
+  deleteDialog(pokemonId: number) {
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      data: { id: pokemonId },
+    });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('Eliminamos pokemon ' + result);
+      if (result != '') {
+        this.delete(result);
+      }
     });
+  }
+
+  delete(pokemonId: number) {
+    this.pokemonService.delete(pokemonId).subscribe(
+      () => {
+        this.cargarRegistros(this.paginaActual, this.cantidadRegistrosAMostrar);
+        this.openSnackBar('Registro eliminado exitosamente', 'Cerrar', true);
+      },
+      (error) => {
+        this.errores = APIErrorsParse(error);
+        this.openSnackBar('Oops! ha ocurrido un error', 'Cerrar', false);
+      }
+    );
   }
 
   openSnackBar(message: string, action: string, success: boolean) {

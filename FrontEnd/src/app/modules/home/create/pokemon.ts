@@ -12,5 +12,5 @@ export interface PokemonDTO {
   nombre: string;
   tipoId: number;
   image: string;
-  tipo: typeDTO;
+  tipo: typeDTO | null;
 }
