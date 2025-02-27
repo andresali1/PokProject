@@ -10,13 +10,16 @@ import { SecurityService } from '../security/security.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  public readonly esAdmin: boolean = false;
   username: string = '';
 
   constructor(
     private router: Router,
     public dialog: MatDialog,
     private securityServide: SecurityService
-  ) {}
+  ) {
+    this.esAdmin = this.securityServide.obtenerRol() == 'admin';
+  }
 
   ngOnInit(): void {
     this.getUserName();

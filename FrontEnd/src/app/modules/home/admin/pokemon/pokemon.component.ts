@@ -38,8 +38,6 @@ export class PokemonComponent implements OnInit {
       .subscribe(
         (respuesta: HttpResponse<PokemonDTO[]>) => {
           this.pokemons = respuesta.body!;
-          console.log('Desde admin');
-          console.log(this.pokemons);
           this.cantidadTotalRegistros = respuesta.headers.get(
             'cantidadTotalRegistros'
           );

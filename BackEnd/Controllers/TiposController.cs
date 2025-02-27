@@ -1,8 +1,10 @@
-﻿using AutoMapper;
+﻿using System.IdentityModel.Tokens.Jwt;
+using AutoMapper;
 using BackEnd;
 using BackEnd.DTOs;
 using BackEnd.Entities;
 using BackEnd.Utilities;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +13,7 @@ namespace Back_end.Controllers
 {
     [Route("api/tipos")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
     public class TiposController : ControllerBase
     {
         private readonly ApplicationDbContext context;
@@ -28,8 +31,7 @@ namespace Back_end.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [AllowAnonymous]
-        public async Task<ActionResult<List<TipoDTO>>> Get([FromQuery] PaginacionDTO paginacionDTO)
+        public async Task<ActionResult<List<TipoDTO>>> Get([FromHeader(Name = "Authorization")] string authorization, [FromQuery] PaginacionDTO paginacionDTO)
         {
             var queryable = context.Tipos.AsQueryable();
             await HttpContext.InsertarParametrosPaginacionEnCabecera(queryable);
@@ -42,6 +44,7 @@ namespace Back_end.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("all")]
+        [AllowAnonymous]
         public async Task<ActionResult<List<TipoDTO>>> GetAll()
         {
             var tipos = await context.Tipos.ToListAsync();

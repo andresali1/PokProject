@@ -11,5 +11,4 @@ export interface userCredentialsRecover extends userCredentials {
 export interface authenticationResponse {
   token: string;
   expiracion: Date;
-  PasswordReset: boolean;
 }

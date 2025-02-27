@@ -144,6 +144,7 @@ namespace BackEnd.Controllers
 
             var user = await userManager.FindByEmailAsync(credencialesUsuario.Email);
             user.PasswordReset = false;
+            user.Active = true;
             var token = await userManager.GeneratePasswordResetTokenAsync(user);
             var resultado = await userManager.ResetPasswordAsync(user, token, credencialesUsuario.Password);
 
@@ -174,6 +175,7 @@ namespace BackEnd.Controllers
 
             claims.AddRange(claimsDb);
             claims.Add(new Claim("isReset", usuario.PasswordReset.ToString()));
+            claims.Add(new Claim("isActive", usuario.Active.ToString()));
 
             var llave = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["llaveJwt"]));
             var creds = new SigningCredentials(llave, SecurityAlgorithms.HmacSha256);
@@ -186,8 +188,7 @@ namespace BackEnd.Controllers
             return new RespuestaAutenticacion()
             {
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
-                Expiracion = expiracion,
-                PasswordReset = usuario.PasswordReset
+                Expiracion = expiracion
             };
         }
 

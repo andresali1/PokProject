@@ -50,9 +50,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     ClockSkew = TimeSpan.Zero
                 });
 
+// builder.Services.AddAuthorization(opciones =>
+//             {
+//                 opciones.AddPolicy("EsAdmin", policy => policy.RequireClaim("role", "admin"));
+//             });
+
 builder.Services.AddAuthorization(opciones =>
             {
-                opciones.AddPolicy("EsAdmin", policy => policy.RequireClaim("role", "admin"));
+                opciones.AddPolicy("EsAdmin", policy => policy.RequireRole("admin"));
             });
 
 builder.Services.AddControllers();

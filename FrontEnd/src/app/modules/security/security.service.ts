@@ -12,6 +12,7 @@ export class SecurityService {
   private apiUrl = environment.apiUrl + 'cuentas';
   private readonly tokenKey = 'token';
   private readonly emailKey = 'email';
+  private readonly roleKey = 'role';
   private readonly expirationKey = 'token-expiracion';
 
   constructor(private httpClient: HttpClient) {}
@@ -77,24 +78,16 @@ export class SecurityService {
     return result;
   }
 
-  getPasswordResetInToken(
-    authenticationResponse: authenticationResponse
-  ): string {
-    let token: string = authenticationResponse.token;
-    let result: string = '';
+  obtenerRol() {
+    const token = this.getToken();
 
-    if (token != null) {
-      try {
-        const decodedToken: any = jwtDecode(token);
-        const isReset = decodedToken.isReset;
+    return this.obtenerCampoJWT(token != null ? token : '', this.roleKey);
+  }
 
-        result = isReset;
-      } catch (error) {
-        result = '';
-      }
-    }
+  obtenerCampoJWT(token: string, campo: string): string {
+    const dataToken = JSON.parse(atob(token.split('.')[1]));
 
-    return result;
+    return dataToken[campo];
   }
 
   recover(credentials: userCredentials): Observable<authenticationResponse> {

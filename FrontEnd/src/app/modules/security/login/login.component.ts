@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
   errors: string[] = [];
   isFirstLogin: boolean = false;
   defaultEmail: string = '';
+  private readonly isResetKey: string = 'isReset';
+  private readonly isActiveKey: string = 'isActive';
 
   constructor(
     private formbuilder: FormBuilder,
@@ -56,11 +58,21 @@ export class LoginComponent implements OnInit {
   getLogin(credentials: userCredentials) {
     this.securityService.login(credentials).subscribe(
       (response) => {
-        let isPasswordReset: string =
-          this.securityService.getPasswordResetInToken(response);
+        let isPasswordReset: string = this.securityService.obtenerCampoJWT(
+          response.token,
+          this.isResetKey
+        );
 
-        if (isPasswordReset === 'True') {
-          this.securityService.saveEmail(credentials.email);
+        let isActive: string = this.securityService.obtenerCampoJWT(
+          response.token,
+          this.isActiveKey
+        );
+
+        this.securityService.saveEmail(credentials.email);
+
+        if (isActive === 'False') {
+          this.getRecover();
+        } else if (isPasswordReset === 'True') {
           this.isFirstLogin = true;
         } else {
           this.isFirstLogin = false;
