@@ -23,15 +23,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 var fronEnd_url = builder.Configuration.GetValue<string>("Frontend_Url");
 
-// builder.Services.AddCors(options =>
-//             {
-//                 options.AddDefaultPolicy(builder =>
-//                 {
-//                     builder.WithOrigins(fronEnd_url).AllowAnyMethod().AllowAnyHeader()
-//                     .WithExposedHeaders(new string[] { "cantidadTotalRegistros" });
-//                 });
-//             });
-
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
@@ -49,11 +40,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     ),
                     ClockSkew = TimeSpan.Zero
                 });
-
-// builder.Services.AddAuthorization(opciones =>
-//             {
-//                 opciones.AddPolicy("EsAdmin", policy => policy.RequireClaim("role", "admin"));
-//             });
 
 builder.Services.AddAuthorization(opciones =>
             {

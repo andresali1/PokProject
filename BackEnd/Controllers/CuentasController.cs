@@ -16,6 +16,7 @@ namespace BackEnd.Controllers
 {
     [Route("api/cuentas")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
     public class CuentasController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> userManager;
@@ -40,7 +41,6 @@ namespace BackEnd.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<ActionResult<List<UsuarioDTO>>> Get([FromQuery] PaginacionDTO paginacionDTO)
         {
             var queryable = context.Users.AsQueryable();
@@ -84,6 +84,7 @@ namespace BackEnd.Controllers
         /// <param name="credencialesUsuario"></param>
         /// <returns></returns>
         [HttpPost("crear")]
+        [AllowAnonymous]
         public async Task<ActionResult<RespuestaAutenticacion>> Crear([FromBody] CredencialesUsuario credencialesUsuario)
         {
             var usuarioExiste = await context.Users.AnyAsync(u => u.Email == credencialesUsuario.Email);
@@ -112,6 +113,7 @@ namespace BackEnd.Controllers
         /// <param name="credencialesUsuario"></param>
         /// <returns></returns>
         [HttpPost("login")]
+        [AllowAnonymous]
         public async Task<ActionResult<RespuestaAutenticacion>> Login([FromBody] CredencialesUsuario credencialesUsuario)
         {
             var resultado = await signInManager.PasswordSignInAsync(credencialesUsuario.Email, credencialesUsuario.Password,
@@ -133,6 +135,7 @@ namespace BackEnd.Controllers
         /// <param name="credencialesUsuario"></param>
         /// <returns></returns>
         [HttpPost("recover")]
+        [AllowAnonymous]
         public async Task<ActionResult<RespuestaAutenticacion>> Recover([FromBody] CredencialesUsuario credencialesUsuario)
         {
             var usuarioExiste = await context.Users.AnyAsync(u => u.Email == credencialesUsuario.Email);

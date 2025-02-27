@@ -7,8 +7,9 @@
             <li class="title" (click)="goHome()">Poke App</li>
             <li class="navBar-menu" (click)="goList()">Lista</li>
             <li class="navBar-menu" (click)="goCreate()">Agregar</li>
-            <li class="navBar-menu" (click)="goAdmin()">Admin</li>
-            <li>Soy admin: {{ esAdmin }}</li>
+            <li *ngIf="esAdmin" class="navBar-menu" (click)="goAdmin()">
+              Admin
+            </li>
           </ul>
         </div>
       </div>

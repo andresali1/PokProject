@@ -45,7 +45,11 @@ export class HomeComponent implements OnInit {
   }
 
   goAdmin() {
-    this.router.navigate(['/home/admin']);
+    if (this.esAdmin) {
+      this.router.navigate(['/home/admin']);
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   getUserName() {
