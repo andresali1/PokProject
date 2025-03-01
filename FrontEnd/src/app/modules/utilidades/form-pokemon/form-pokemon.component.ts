@@ -40,6 +40,7 @@ export class FormPokemonComponent implements OnInit {
   @Output() modalClose: EventEmitter<boolean> = new EventEmitter<boolean>();
   errors: string[] = [];
   imagenCambiada: boolean = false;
+  label: string = 'Guardar';
 
   constructor(
     private formbuilder: FormBuilder,
@@ -59,6 +60,7 @@ export class FormPokemonComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.pokemonId > 0) {
+      this.label = 'Editar';
       this.isEdit = true;
       this.obtenerPorId(this.pokemonId);
     }
@@ -66,7 +68,6 @@ export class FormPokemonComponent implements OnInit {
     this.typeService.obtenerListado().subscribe(
       (response) => {
         this.tipos = response;
-        console.log(this.tipos);
       },
       (error) => {
         this.openSnackBar('Oops! ha ocurrido un error', 'Cerrar', false);

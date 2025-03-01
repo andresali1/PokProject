@@ -35,7 +35,10 @@ mat-card {
 .cardImg img {
   margin-top: 1px;
   border: solid 5px #bdae5a;
-  width: 100%;
+  min-width: 200px;
+  max-width: 200px;
+  min-height: 200px;
+  max-height: 200px;
 }
 
 .cardInfo {

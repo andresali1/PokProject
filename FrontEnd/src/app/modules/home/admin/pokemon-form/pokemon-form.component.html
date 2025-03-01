@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Editar Pokemón</h2>
+<h2 mat-dialog-title>{{ this.label }} Pokemón</h2>
 <mat-dialog-content class="mat-typography">
   <app-form-pokemon
     [isEdit]="isEdit"
@@ -16,6 +16,6 @@
     color="primary"
     [mat-dialog-close]="objPokemon"
   >
-    Guardar
+    {{ this.label }}
   </button>
 </mat-dialog-actions>

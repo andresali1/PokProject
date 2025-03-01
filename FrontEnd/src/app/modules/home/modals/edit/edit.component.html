@@ -1,14 +1,20 @@
 <h2 mat-dialog-title>Editar Pokemón</h2>
 <mat-dialog-content class="mat-typography">
-  <app-form-pokemon [isEdit]="isEdit"></app-form-pokemon>
+  <app-form-pokemon
+    [isEdit]="isEdit"
+    [fromAdmin]="fromAdmin"
+    [pokemonId]="pokedex"
+    (pokemonSave)="editar($event)"
+    (modalClose)="cerrar()"
+  ></app-form-pokemon>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancelar</button>
+  <button id="cancelBtn" mat-button mat-dialog-close>Cancelar</button>
   <button
+    id="saveBtn"
     mat-raised-button
     color="primary"
-    [mat-dialog-close]="false"
-    cdkFocusInitial
+    [mat-dialog-close]="objPokemon"
   >
     Guardar
   </button>

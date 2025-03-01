@@ -37,7 +37,7 @@
           </mat-select>
         </mat-form-field>
 
-        <div class="buttons" *ngIf="fromAdmin">
+        <div class="buttons">
           <a mat-stroked-button color="warn" (click)="cancel()">Cancelar</a>
           <button
             mat-flat-button
@@ -45,7 +45,7 @@
             [disabled]="form.invalid"
             (click)="save(form.value)"
           >
-            Crear
+            {{ label }}
           </button>
         </div>
       </form>

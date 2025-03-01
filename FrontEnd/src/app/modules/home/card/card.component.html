@@ -1,12 +1,22 @@
 <mat-card>
-  <div class="code"><span>150</span></div>
+  <div class="code">
+    <span>{{ pokemon.pokedex }}</span>
+  </div>
   <mat-card-content>
     <div class="cardImg">
-      <img src="../../../../assets/img/fondo.jpg" mat-card-image />
+      <img
+        [src]="
+          pokemon.image != null && pokemon.image != ''
+            ? pokemon.image
+            : '../../../../assets/img/default.webp'
+        "
+        alt="Pokemon Img"
+        mat-card-image
+      />
     </div>
     <div class="cardInfo">
-      <span class="cardInfo-title">Pikachu</span>
-      <span>Eléctico</span>
+      <span class="cardInfo-title">{{ pokemon.nombre }}</span>
+      <span>{{ pokemon.tipo?.nombre }}</span>
     </div>
   </mat-card-content>
   <mat-card-footer>
@@ -23,7 +33,7 @@
         class="deleteBtn"
         mat-mini-fab
         aria-label="Eliminar"
-        (click)="closeDialog()"
+        (click)="deleteDialog()"
       >
         <mat-icon>delete</mat-icon>
       </button>

@@ -1,16 +1,11 @@
 <div class="cardContainer">
   <h2>Pokemón registrados</h2>
   <div class="cards">
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
+    <app-card
+      *ngFor="let pokemon of pokemons"
+      [pokemon]="pokemon"
+      (editarRegistro)="update($event)"
+    ></app-card>
   </div>
+  <mat-paginator [pageSizeOptions]="[4, 8, 16, 48]"></mat-paginator>
 </div>

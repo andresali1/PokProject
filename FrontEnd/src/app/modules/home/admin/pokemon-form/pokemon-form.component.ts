@@ -23,6 +23,7 @@ export class PokemonFormComponent implements OnInit {
   };
   isEdit: boolean = false;
   pokemonId: number = 0;
+  label: string = 'Crear';
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -32,6 +33,7 @@ export class PokemonFormComponent implements OnInit {
   ) {
     this.pokemonId = data.id;
     this.isEdit = this.isEdit;
+    if (this.pokemonId > 0) this.label = 'Editar';
   }
 
   ngOnInit(): void {}
