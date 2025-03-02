@@ -56,7 +56,6 @@ namespace BackEnd.Controllers
         /// <param name="usuarioId"></param>
         /// <returns></returns>
         [HttpPost("hacerAdmin")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "EsAdmin")]
         public async Task<ActionResult> HacerAdmin([FromBody] string usuarioId)
         {
             var usuario = await userManager.FindByIdAsync(usuarioId);
@@ -70,7 +69,6 @@ namespace BackEnd.Controllers
         /// <param name="usuarioId"></param>
         /// <returns></returns>
         [HttpPost("removerAdmin")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "EsAdmin")]
         public async Task<ActionResult> RemoverAdmin([FromBody] string usuarioId)
         {
             var usuario = await userManager.FindByIdAsync(usuarioId);

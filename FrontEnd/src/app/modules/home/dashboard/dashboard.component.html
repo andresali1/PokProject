@@ -1,3 +1,29 @@
-<div class="chartContainer">
+<div class="dashboardContainer">
+  <div class="lastPokemon">
+    <h2 class="dashboard_title">Ultimo Pokemón Registrado</h2>
+    <mat-card class="colorful-card">
+      <div class="card-header">
+        <img
+          mat-card-image
+          [src]="
+            pokemonReciente.image
+              ? pokemonReciente.image
+              : '../../../../assets/img/default.webp'
+          "
+          alt="Imagen neón"
+        />
+      </div>
+
+      <mat-card-content>
+        <h2>{{ pokemonReciente.nombre }}</h2>
+      </mat-card-content>
+      <mat-card-actions>
+        <p>{{ pokemonReciente.tipo?.nombre }}</p>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <div class="chartContainer">
+    <h2 class="dashboard_title">Pokemones Registrados por Tipo</h2>
     <div id="chart"></div>
+  </div>
 </div>

@@ -30,7 +30,7 @@ export class EditComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  editar(pokemonCreationDTO: PokemonCreationDTO) {
+  guardar(pokemonCreationDTO: PokemonCreationDTO) {
     this.objPokemon = pokemonCreationDTO;
 
     this.cdr.detectChanges();

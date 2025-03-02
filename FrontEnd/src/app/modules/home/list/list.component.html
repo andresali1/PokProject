@@ -5,7 +5,15 @@
       *ngFor="let pokemon of pokemons"
       [pokemon]="pokemon"
       (editarRegistro)="update($event)"
+      (eliminarRegistro)="delete($event)"
     ></app-card>
   </div>
-  <mat-paginator [pageSizeOptions]="[4, 8, 16, 48]"></mat-paginator>
+  <mat-paginator
+    [pageSizeOptions]="[4, 8, 16, 48]"
+    showFirstLastButtons
+    [length]="cantidadTotalRegistros"
+    [pageSize]="cantidadRegistrosAMostrar"
+    class="mat-elevation-z8"
+    (page)="actualizarPaginacion($event)"
+  ></mat-paginator>
 </div>

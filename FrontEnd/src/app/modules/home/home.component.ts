@@ -3,6 +3,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { EditComponent } from './modals/edit/edit.component';
 import { SecurityService } from '../security/security.service';
+import { PokemonService } from './create/pokemon.service';
+import { PokemonCreationDTO } from './create/pokemon';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { APIErrorsParse } from '../utilidades/utilidades';
 
 @Component({
   selector: 'app-home',
@@ -12,11 +16,14 @@ import { SecurityService } from '../security/security.service';
 export class HomeComponent implements OnInit {
   public readonly esAdmin: boolean = false;
   username: string = '';
+  errores: string[] = [];
 
   constructor(
     private router: Router,
     public dialog: MatDialog,
-    private securityServide: SecurityService
+    private securityServide: SecurityService,
+    private pokemonService: PokemonService,
+    private _snackBar: MatSnackBar
   ) {
     this.esAdmin = this.securityServide.obtenerRol() == 'admin';
   }
@@ -39,9 +46,21 @@ export class HomeComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('Soy home');
-      console.log(result);
+      this.create(result);
     });
+  }
+
+  create(pokemon: PokemonCreationDTO) {
+    this.pokemonService.crear(pokemon).subscribe(
+      () => {
+        this.openSnackBar('Registro guardado exitosamente', 'Cerrar', true);
+        this.router.navigate(['/home/list']);
+      },
+      (error) => {
+        this.errores = APIErrorsParse(error);
+        this.openSnackBar('Oops! ha ocurrido un error', 'Cerrar', false);
+      }
+    );
   }
 
   goAdmin() {
@@ -61,5 +80,14 @@ export class HomeComponent implements OnInit {
   logout() {
     this.securityServide.logout();
     this.router.navigate(['/auth']);
+  }
+
+  openSnackBar(message: string, action: string, success: boolean) {
+    const snackClass = success ? 'success-snackbar' : 'fail-snackbar';
+
+    this._snackBar.open(message, action, {
+      duration: 3000,
+      panelClass: [snackClass],
+    });
   }
 }

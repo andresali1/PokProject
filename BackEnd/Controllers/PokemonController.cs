@@ -57,6 +57,36 @@ namespace Back_end.Controllers
         }
 
         /// <summary>
+        /// Método para obtener el ultimo pokemon creado
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("reciente")]
+        public async Task<ActionResult<PokemonDTO>> GetLatest()
+        {
+            var pokemon = await context.Pokemons.Include(p => p.Tipo).OrderByDescending(p => p.FechaCreacion).FirstOrDefaultAsync();
+            return mapper.Map<PokemonDTO>(pokemon);
+        }
+
+        /// <summary>
+        /// Método que obtiene el objeto con tipos organizados por conteo y nombre según los pokemon creados
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("dashboard")]
+        public async Task<ActionResult<DashboardDTO>> GetDashboard()
+        {
+            var tipos = await context.Pokemons.Select(p => p.Tipo).ToListAsync();
+
+            DashboardDTO objDashboard = new DashboardDTO()
+            {
+                Conteo = tipos.GroupBy(t => t.Id).OrderBy(g => g.Key).Select(g => g.Count()).ToList(),
+                Tipos = tipos.GroupBy(t => t.Id).OrderBy(g => g.Key).Select(g => g.First().Nombre).ToList()
+            };
+
+
+            return objDashboard;
+        }
+
+        /// <summary>
         /// Método para crear un Pokemon
         /// </summary>
         /// <param name="pokemonCreationDTO"></param>

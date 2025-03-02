@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { PokemonCreationDTO, PokemonDTO } from './pokemon';
 import { Observable } from 'rxjs';
+import { dashboardDTO } from '../dashboard/dashboard';
 
 @Injectable({
   providedIn: 'root',
@@ -29,8 +30,16 @@ export class PokemonService {
     });
   }
 
+  public obtenerUltimoCreado(): Observable<PokemonDTO> {
+    return this.http.get<PokemonDTO>(`${this.apiUrl}/reciente`);
+  }
+
   public obtenerPorId(id: number): Observable<PokemonDTO> {
     return this.http.get<PokemonDTO>(`${this.apiUrl}/${id}`);
+  }
+
+  public obtenerDashboard(): Observable<dashboardDTO> {
+    return this.http.get<dashboardDTO>(`${this.apiUrl}/dashboard`);
   }
 
   crear(pokemon: PokemonCreationDTO): Observable<number> {

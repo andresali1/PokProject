@@ -24,6 +24,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             .HasDefaultValue(true);
 
         builder.Entity<Pokemon>().Property(p => p.Pokedex).ValueGeneratedNever();
+
+        builder.Entity<Pokemon>().Property(p => p.FechaCreacion).HasDefaultValueSql("GETDATE()");
     }
 
     public DbSet<Tipo> Tipos { get; set; }

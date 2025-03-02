@@ -22,6 +22,8 @@ export class CardComponent implements OnInit {
   @Output() editarRegistro: EventEmitter<PokemonCreationDTO> =
     new EventEmitter<PokemonCreationDTO>();
 
+  @Output() eliminarRegistro: EventEmitter<number> = new EventEmitter<number>();
+
   constructor(
     public dialog: MatDialog,
     private pokemonService: PokemonService
@@ -45,11 +47,15 @@ export class CardComponent implements OnInit {
     this.editarRegistro.emit(pokemon);
   }
 
-  deleteDialog() {
-    const dialogRef = this.dialog.open(ConfirmComponent);
+  deleteDialog(pokemonId: number) {
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      data: { id: pokemonId },
+    });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+      if (result != '' && result != undefined) {
+        this.eliminarRegistro.emit(result);
+      }
     });
   }
 }
