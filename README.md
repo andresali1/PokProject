@@ -1,4 +1,4 @@
-# PeliculasAngular.Net
+# PokePorject
 Proyecto WebApi con una aplicación de registro de Pokemon. Tiene un sistema de Autenticación y de autorización. Usa SQL Server como motor de base de datos. Adicionalmente hay un cliente en Angular que consume el web API desde un front end.
 
 ### Tecnologías Utilizadas
